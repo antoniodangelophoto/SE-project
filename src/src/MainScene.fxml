@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="GeometryDraw" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <SplitPane dividerPositions="0.1497326203208556" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <ToolBar prefHeight="55.0" prefWidth="600.0">
+                     <items>
+                        <MenuButton mnemonicParsing="false" text="File">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Import" />
+                              <MenuItem mnemonicParsing="false" text="Export" />
+                           </items>
+                        </MenuButton>
+                        <Button fx:id="rectangleMode" mnemonicParsing="false" text="Rectangle" />
+                        <Button fx:id="ellipseMode" mnemonicParsing="false" text="Ellipse" />
+                        <Button fx:id="segmentMode" mnemonicParsing="false" text="Line" />
+                        <ComboBox fx:id="customShape" prefHeight="25.0" prefWidth="153.0" promptText="CustomShapeWIP" />
+                        <ComboBox fx:id="Color" prefHeight="25.0" prefWidth="83.0" promptText="Color" />
+                        <Button fx:id="selectionMode" mnemonicParsing="false" text="Select" />
+                     </items>
+                  </ToolBar>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Canvas height="318.0" layoutX="-1.0" layoutY="8.0" width="600.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </content>
+</TitledPane>
