@@ -4,12 +4,10 @@
  */
 package com.unisa.diem.SE.tool;
 
-import javafx.scene.shape.Shape;
-
 /**
  *
  * @author antonio.dangelo.photo
  */
-public class DrawEllipse {
+public class Shape {
     
 }
