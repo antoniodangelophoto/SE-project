@@ -25,13 +25,16 @@
                         <Button fx:id="ellipseMode" mnemonicParsing="false" onAction="#ellipseMode" text="Ellipse" />
                         <Button fx:id="segmentMode" mnemonicParsing="false" onAction="#lineMode" text="Line" />
                         <ComboBox fx:id="customShape" onAction="#selectionMode" prefHeight="32.0" prefWidth="228.0" promptText="CustomShapeWIP" />
-                        <ComboBox fx:id="Color" prefHeight="31.0" prefWidth="161.0" promptText="Color" />
+                        <ComboBox fx:id="ColorBox" prefHeight="31.0" prefWidth="161.0" promptText="Color" />
                         <Button fx:id="selectionMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="111.0" text="Select" />
                      </items>
                   </ToolBar>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Canvas fx:id="Canvas" height="567.0" layoutY="-90.0" onMousePressed="#startDrag" onMouseReleased="#endDrag" width="860.0" />
+               </children></AnchorPane>
         </items>
       </SplitPane>
    </content>

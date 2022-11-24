@@ -32,7 +32,7 @@ public class project extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-        System.out.print("DIOCANE");
+        System.out.print("ciao");
     }
     
 }
