@@ -7,35 +7,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="GeometryDraw" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="860.0" text="GeometryDraw" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.diem.SE.MainSceneController">
    <content>
       <SplitPane dividerPositions="0.1497326203208556" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <ToolBar prefHeight="55.0" prefWidth="600.0">
+                  <ToolBar prefHeight="80.0" prefWidth="860.0">
                      <items>
                         <MenuButton mnemonicParsing="false" text="File">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="Import" />
-                              <MenuItem mnemonicParsing="false" text="Export" />
+                              <MenuItem fx:id="Import" mnemonicParsing="false" onAction="#loadFile" text="Import" />
+                              <MenuItem fx:id="Export" mnemonicParsing="false" onAction="#exportFile" text="Export" />
                            </items>
                         </MenuButton>
-                        <Button fx:id="rectangleMode" mnemonicParsing="false" text="Rectangle" />
-                        <Button fx:id="ellipseMode" mnemonicParsing="false" text="Ellipse" />
-                        <Button fx:id="segmentMode" mnemonicParsing="false" text="Line" />
-                        <ComboBox fx:id="customShape" prefHeight="25.0" prefWidth="153.0" promptText="CustomShapeWIP" />
-                        <ComboBox fx:id="Color" prefHeight="25.0" prefWidth="83.0" promptText="Color" />
-                        <Button fx:id="selectionMode" mnemonicParsing="false" text="Select" />
+                        <Button fx:id="rectangleMode" mnemonicParsing="false" onAction="#rectangleMode" text="Rectangle" />
+                        <Button fx:id="ellipseMode" mnemonicParsing="false" onAction="#ellipseMode" text="Ellipse" />
+                        <Button fx:id="segmentMode" mnemonicParsing="false" onAction="#lineMode" text="Line" />
+                        <ComboBox fx:id="customShape" onAction="#selectionMode" prefHeight="32.0" prefWidth="228.0" promptText="CustomShapeWIP" />
+                        <ComboBox fx:id="Color" prefHeight="31.0" prefWidth="161.0" promptText="Color" />
+                        <Button fx:id="selectionMode" mnemonicParsing="false" prefHeight="31.0" prefWidth="111.0" text="Select" />
                      </items>
                   </ToolBar>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
-                  <Canvas height="318.0" layoutX="-1.0" layoutY="8.0" width="600.0" />
-               </children>
-            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
         </items>
       </SplitPane>
    </content>
