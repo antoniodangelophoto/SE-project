@@ -9,7 +9,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.*;
 /**
  *
- * @author Giovanni Casella
+ * @author Giovanni Casella & Antonio D'Angelo
  */
 public class Shape {
     private Point2D startPosition;
