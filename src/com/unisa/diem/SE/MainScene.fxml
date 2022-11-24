@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="860.0" text="GeometryDraw" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.diem.SE.MainSceneController">
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="860.0" text="GeometryDraw" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.diem.SE.MainSceneController">
    <content>
       <SplitPane dividerPositions="0.1497326203208556" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
@@ -33,7 +36,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Canvas fx:id="Canvas" height="567.0" layoutY="-90.0" onMousePressed="#startDrag" onMouseReleased="#endDrag" width="860.0" />
+                  <Pane id="drawingPane" layoutY="-1.0" onDragDetected="#setLine" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" prefHeight="483.0" prefWidth="860.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>

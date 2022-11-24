@@ -75,9 +75,9 @@ public class Shape {
         this.topLeft = pos;
     }
     
-    public void draw(Canvas canvas) {
+    //public void draw(Canvas canvas) {
         
-    }
+    //}
     
     
     
