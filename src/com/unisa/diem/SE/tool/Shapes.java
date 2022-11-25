@@ -23,11 +23,11 @@ public class Shapes {
     public Shapes(){
     }
     
-    public Shapes(Point2D startPos, Point2D endPos , Color strockColor){
+    public Shapes(Point2D startPos, Point2D endPos , Color strockColor, Color fillColor){
         this.color = strockColor;
         this.startPosition = startPos;
         this.endPosition = endPos;
-        this.fillColor = Color.TRANSPARENT;
+        this.fillColor = fillColor;
         this.topLeft = calculateTopLeft();
     }
 

@@ -15,43 +15,76 @@ import javafx.scene.layout.Pane;
  */
 public class dEllipse extends Shapes {
     
-    private double hRadius;
-    private double vRadius;
+    private double xRadius;
+    private double yRadius;
+    
+    private double xCenter;
+    private double yCenter;
+    
+
+    public double getxCenter() {
+        return xCenter;
+    }
+
+    public void setxCenter(double xCenter) {
+        this.xCenter = xCenter;
+    }
+
+    public double getyCenter() {
+        return yCenter;
+    }
+
+    public void setyCenter(double yCenter) {
+        this.yCenter = yCenter;
+    }
+    
     
     public dEllipse(){
         
     }
 
-    public double gethRadius() {
-        return hRadius;
+    public double getxRadius() {
+        return xRadius;
     }
 
-    public void sethRadius(double hRadius) {
-        this.hRadius = hRadius;
+    public void setxRadius(double xRadius) {
+        this.xRadius = xRadius;
     }
 
-    public double getvRadius() {
-        return vRadius;
+    public double getyRadius() {
+        return yRadius;
     }
 
-    public void setvRadius(double vRadius) {
-        this.vRadius = vRadius;
+    public void setyRadius(double yRadius) {
+        this.yRadius = yRadius;
     }
     
-    public dEllipse(Point2D startPos, Point2D endPos, Color strockColor){
-        super(startPos, endPos, strockColor);
-        hRadius = Math.abs(startPos.getX() - endPos.getX())/2;
-        vRadius = Math.abs(startPos.getY() - endPos.getY())/2;
+    public dEllipse(Point2D startPos, Point2D endPos, Color strockColor, Color fillColor){
+        super(startPos, endPos, strockColor, fillColor);
+        xRadius = Math.abs(startPos.getX() - endPos.getX())/2;
+        yRadius = Math.abs(startPos.getY() - endPos.getY())/2;
+        xCenter = Math.abs(endPos.getX()-startPos.getX());
+        yCenter = Math.abs(endPos.getY()-startPos.getY());
+        
     }
+    
     @Override
-    public void draw(Pane Pane){
+    public void draw(Pane pane){
         Ellipse ellipse=new Ellipse();
+        ellipse.setCenterX(this.xCenter);
+        ellipse.setCenterY(this.yCenter);
+        ellipse.setRadiusX(this.xRadius);
+        ellipse.setRadiusY(this.yRadius);
+        ellipse.setStroke(Color.BLACK);
+        ellipse.setFill(Color.TRANSPARENT);
+        pane.getChildren().add(ellipse);
         
         
-        GraphicsContext gc = Pane.getGraphicsContext2D();
-        gc.setStroke(super.getColor());
-        gc.strokeOval(super.getTopLeft().getX(), super.getTopLeft().getY(), hRadius*2, vRadius*2);
-        gc.setFill(super.getFillColor());
-        gc.fillOval(super.getTopLeft().getX(), super.getTopLeft().getY(), hRadius*2, vRadius*2);
+       
+        //GraphicsContext gc = Pane.getGraphicsContext2D();
+        //gc.setStroke(super.getColor());
+        //gc.strokeOval(super.getTopLeft().getX(), super.getTopLeft().getY(), hRadius*2, vRadius*2);
+        //gc.setFill(super.getFillColor());
+        //gc.fillOval(super.getTopLeft().getX(), super.getTopLeft().getY(), hRadius*2, vRadius*2);
     }
 }

@@ -12,8 +12,8 @@ public class Line extends Shapes{
     
     private double length;
     
-    public Line(Point2D start, Point2D end, Color color){
-        super(start,end,color);
+    public Line(Point2D start, Point2D end, Color strockColor, Color fillColor){
+        super(start,end,strockColor, fillColor);
         length = start.distance(end);
     }
 

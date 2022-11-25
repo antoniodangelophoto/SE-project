@@ -16,8 +16,8 @@ public class Rect extends Shapes{
     Double Base;
     Double Heigth;
 
-    public Rect(Point2D startPos, Point2D endPos, Color strockColor) {
-        super(startPos, endPos, strockColor);
+    public Rect(Point2D startPos, Point2D endPos, Color strockColor, Color fillColor) {
+        super(startPos, endPos, strockColor, fillColor);
         this.Base=calculateBase();
         this.Heigth=calculateHeigth();
     }
