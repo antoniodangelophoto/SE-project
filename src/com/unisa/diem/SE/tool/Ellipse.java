@@ -43,12 +43,12 @@ public class Ellipse extends Shape {
         hRadius = Math.abs(startPos.getX() - endPos.getX())/2;
         vRadius = Math.abs(startPos.getY() - endPos.getY())/2;
     }
-    @Override
-    public void draw(Canvas canvas){
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+    /*@Override
+    public void draw(Pane Pane){
+        GraphicsContext gc = Pane.getGraphicsContext2D();
         gc.setStroke(super.getColor());
         gc.strokeOval(super.getTopLeft().getX(), super.getTopLeft().getY(), hRadius*2, vRadius*2);
         gc.setFill(super.getFillColor());
         gc.fillOval(super.getTopLeft().getX(), super.getTopLeft().getY(), hRadius*2, vRadius*2);
-    }
+    }*/
 }

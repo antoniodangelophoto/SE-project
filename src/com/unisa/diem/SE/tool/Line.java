@@ -6,7 +6,7 @@ package com.unisa.diem.SE.tool;
 
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
+import com.unisa.diem.SE.tool.Shape;
 
 public class Line extends Shape{
     
@@ -21,11 +21,11 @@ public class Line extends Shape{
         
     }
     
-    @Override
+    /*@Override
     public void setFillColor(Color color){
         setColor(color);
     }
-    
+    */
     @Override
     public void setTopLeft(Point2D x){
         Point2D temp = x.subtract(this.getPosition());
