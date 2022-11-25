@@ -6,9 +6,9 @@ package com.unisa.diem.SE.tool;
 
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
-import com.unisa.diem.SE.tool.Shape;
+import com.unisa.diem.SE.tool.Shapes;
 
-public class Line extends Shape{
+public class Line extends Shapes{
     
     private double length;
     

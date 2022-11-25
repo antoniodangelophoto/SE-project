@@ -5,6 +5,7 @@
 package com.unisa.diem.SE.tool;
 
 import javafx.geometry.Point2D;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.*;
 
@@ -12,17 +13,17 @@ import javafx.scene.paint.*;
  *
  * @author Giovanni Casella & Antonio D'Angelo
  */
-public class Shape {
+public class Shapes {
     private Point2D startPosition;
     private Point2D endPosition;
     private Point2D topLeft;
     private Color color;
     private Color fillColor;
     
-    public Shape(){
+    public Shapes(){
     }
     
-    public Shape(Point2D startPos, Point2D endPos , Color strockColor){
+    public Shapes(Point2D startPos, Point2D endPos , Color strockColor){
         this.color = strockColor;
         this.startPosition = startPos;
         this.endPosition = endPos;
@@ -75,20 +76,7 @@ public class Shape {
         this.topLeft = pos;
     }
     
-    public Rectangle draw(){
-        double H, base;
-        if(this.startPosition.getX()>this.endPosition.getX()){
-        base=this.startPosition.getX()-this.endPosition.getX();
-        }
-        else{
-        base=this.endPosition.getX()-this.startPosition.getX();
-        }
-        if(this.startPosition.getY()>this.endPosition.getY()){
-        H=this.startPosition.getY()-this.endPosition.getY();
-        }else H=this.endPosition.getY()-this.startPosition.getY();
-        Rectangle rect=new Rectangle(base,H,Color.TRANSPARENT);
-        rect.relocate(startPosition.getX(),startPosition.getY());
-        return rect;
+    public void draw(Pane pane){
         
     }
     

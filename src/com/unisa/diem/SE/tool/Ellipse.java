@@ -13,7 +13,7 @@ import javafx.scene.canvas.Canvas;
  *
  * @author antonio.dangelo.photo
  */
-public class Ellipse extends Shape {
+public class Ellipse extends Shapes {
     
     private double hRadius;
     private double vRadius;
