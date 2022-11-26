@@ -13,8 +13,9 @@ import javafx.scene.shape.Shape;
  * @author giova
  */
 public class Rect extends Shapes{
-    Double Base;
-    Double Heigth;
+    private double Base;
+    private double Heigth;
+    private Rectangle rect;
 
     public Rect(Point2D startPos, Point2D endPos, Color strockColor, Color fillColor) {
         super(startPos, endPos, strockColor, fillColor);

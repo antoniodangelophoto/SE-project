@@ -8,6 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.*;
+import javafx.scene.shape.Shape;
 
 /**
  *
@@ -77,7 +78,6 @@ public class Shapes {
     }
     
     public void draw(Pane pane){
-        
     }
     
     

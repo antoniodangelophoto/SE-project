@@ -8,6 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
 
 /**
  *
@@ -21,23 +22,12 @@ public class dEllipse extends Shapes {
     private double xCenter;
     private double yCenter;
     
+    private Color strokeColor;
+    private Color fillColor;
 
-    public double getxCenter() {
-        return xCenter;
-    }
-
-    public void setxCenter(double xCenter) {
-        this.xCenter = xCenter;
-    }
-
-    public double getyCenter() {
-        return yCenter;
-    }
-
-    public void setyCenter(double yCenter) {
-        this.yCenter = yCenter;
-    }
-    
+    Ellipse ellipse;
+   
+   
     
     public dEllipse(){
         
@@ -59,32 +49,64 @@ public class dEllipse extends Shapes {
         this.yRadius = yRadius;
     }
     
-    public dEllipse(Point2D startPos, Point2D endPos, Color strockColor, Color fillColor){
-        super(startPos, endPos, strockColor, fillColor);
-        xRadius = Math.abs(startPos.getX() - endPos.getX())/2;
-        yRadius = Math.abs(startPos.getY() - endPos.getY())/2;
-        xCenter = Math.abs(endPos.getX()-startPos.getX());
-        yCenter = Math.abs(endPos.getY()-startPos.getY());
+    public double getxCenter() {
+        return xCenter;
+    }
+
+    public void setxCenter(double xCenter) {
+        this.xCenter = xCenter;
+    }
+
+    public double getyCenter() {
+        return yCenter;
+    }
+
+    public void setyCenter(double yCenter) {
+        this.yCenter = yCenter;
+    }
+    
+    
+    public Color getStrokeColor() {
+        return strokeColor;
+    }
+
+    public void setStrokeColor(Color strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
+    public Color getFillColor() {
+        return fillColor;
+    }
+
+    public void setFillColor(Color fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    
+    public dEllipse(Point2D startPos, Point2D endPos, Color strokeColor, Color fillColor){
+        super(startPos, endPos, strokeColor, fillColor);
+        setxRadius(Math.abs(startPos.getX() - endPos.getX()));
+        setyRadius(Math.abs(startPos.getY() - endPos.getY()));
+        
+        setxCenter(startPos.getX());
+        setyCenter(startPos.getY());
+        
+        
+        setStrokeColor(strokeColor);
+        setFillColor(fillColor);
         
     }
     
     @Override
     public void draw(Pane pane){
-        Ellipse ellipse=new Ellipse();
+        ellipse=new Ellipse();
         ellipse.setCenterX(this.xCenter);
         ellipse.setCenterY(this.yCenter);
         ellipse.setRadiusX(this.xRadius);
         ellipse.setRadiusY(this.yRadius);
-        ellipse.setStroke(Color.BLACK);
-        ellipse.setFill(Color.TRANSPARENT);
+        ellipse.setStroke(this.strokeColor);
+        ellipse.setFill(this.fillColor);
+        
         pane.getChildren().add(ellipse);
-        
-        
-       
-        //GraphicsContext gc = Pane.getGraphicsContext2D();
-        //gc.setStroke(super.getColor());
-        //gc.strokeOval(super.getTopLeft().getX(), super.getTopLeft().getY(), hRadius*2, vRadius*2);
-        //gc.setFill(super.getFillColor());
-        //gc.fillOval(super.getTopLeft().getX(), super.getTopLeft().getY(), hRadius*2, vRadius*2);
     }
 }
