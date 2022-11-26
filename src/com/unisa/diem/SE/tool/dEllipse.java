@@ -8,7 +8,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 
 /**
  *
@@ -28,7 +27,6 @@ public class dEllipse extends Shapes {
     Ellipse ellipse;
    
    
-    
     public dEllipse(){
         
     }

@@ -7,7 +7,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 /**
  *
  * @author giova
@@ -61,7 +60,7 @@ public class Rect extends Shapes{
 
     @Override
     public void draw(Pane pane) {
-        Rectangle rect=new Rectangle(this.Base,this.Heigth,Color.TRANSPARENT);
+        rect=new Rectangle(this.Base,this.Heigth,Color.TRANSPARENT);
         rect.relocate(this.getPosition().getX(),this.getPosition().getY());
         rect.setStroke(Color.BLACK);
         pane.getChildren().add(rect);
