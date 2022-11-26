@@ -9,18 +9,39 @@ import javafx.scene.paint.Color;
 import com.unisa.diem.SE.tool.Shapes;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 /**
  *
  * @author GBCuomo
  */
 public class LineSegment extends Shapes{
     
+    private Color strokeColor;
+    private Color fillColor;
+
+    public Color getStrokeColor() {
+        return strokeColor;
+    }
+
+    public void setStrokeColor(Color strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
+    public Color getFillColor() {
+        return fillColor;
+    }
+
+    public void setFillColor(Color fillColor) {
+        this.fillColor = fillColor;
+    }
     
+    
+    
+
 
     public LineSegment(Point2D start, Point2D end,Color strockColor, Color color){
         super(start,end,strockColor,color);
-
+        setFillColor(color);
+        setStrokeColor(strockColor);
     }
 
     public LineSegment() {
@@ -47,6 +68,9 @@ public class LineSegment extends Shapes{
         line.setStartY(this.getPosition().getY());
         line.setEndX(this.getEndPosition().getX());
         line.setEndY(this.getEndPosition().getY());
+        
+        line.setStroke(getStrokeColor());
+        line.setFill(getFillColor());
         pane.getChildren().add(line);
     }
 
