@@ -64,12 +64,7 @@ public class FileManager {
                 
                 Shapes s;
                 
-                if(stringScanner.next().equals("Line"))
-                    s = new LineSegment();
-                else if(stringScanner.next().equals("Rectangle"))
-                    s = new Rect();
-                else 
-                    s = new dEllipse();
+
                  
                 double startX = stringScanner.nextDouble();
                 System.out.println(startX);
@@ -81,8 +76,17 @@ public class FileManager {
                 Point2D end = new Point2D(endX, endY);
                 //Color stroke = Color.decode(stringScanner.next());
                 //Color fill = Color.decode(stringScanner.next());
-                stringScanner.nextDouble();
-                stringScanner.nextDouble();
+                String strockColor = stringScanner.next();
+                String fillColor = stringScanner.next();
+                String s1 = strockColor.substring(2,3);
+                String s2 = strockColor.substring()
+                if(stringScanner.next().equals("Line"))
+                    s = new LineSegment(start, end, Color.rgb(0, 0, 0), fillColor );
+                else if(stringScanner.next().equals("Rectangle"))
+                    s = new Rect();
+                else 
+                    s = new dEllipse();
+
                 s.setPosition(start);
                 s.setEndPosition(end);
                 
