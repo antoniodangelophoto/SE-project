@@ -25,6 +25,12 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import com.unisa.diem.SE.tool.*;
+import java.beans.DefaultPersistenceDelegate;
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.BufferedOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 //import javafx.scene.shape.Shape;
 
 /**
@@ -37,6 +43,7 @@ public class FileManager {
         this.myArray = new ArrayList<>();
     }
 
+    /*
     public void saveFile(String file, ArrayList<Shapes> ShapeList) {
         try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)))){
             for(Shapes s : ShapeList){
@@ -106,4 +113,37 @@ public class FileManager {
         }
 
     }
+    */
+    
+    
+    public void saveFile(String file, ArrayList<Shapes> ShapeList, Pane pane) throws IOException {
+        try (XMLEncoder encoder = new XMLEncoder(
+        new BufferedOutputStream(
+            Files.newOutputStream(Paths.get(file))))) {
+
+        encoder.setExceptionListener(e -> {
+            throw new RuntimeException(e);
+        });
+        
+        encoder.setPersistenceDelegate(Color.class, new DefaultPersistenceDelegate(new String[]{"red", "green", "blue", "opacity"}));
+        encoder.writeObject(pane.getChildren().toArray(new Node[0]));
+        }
+                
+    }
+    
+    
+    public void loadFile(String file, Pane pane) throws IOException {
+        try (XMLDecoder decoder = new XMLDecoder(
+        new BufferedInputStream(
+            Files.newInputStream(Paths.get(file))))) {
+
+        decoder.setExceptionListener(e -> {
+            throw new RuntimeException(e);
+        });
+
+        pane.getChildren().setAll((Node[]) decoder.readObject());
+    }
+    }
+    
+    
 }
