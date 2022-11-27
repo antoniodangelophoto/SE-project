@@ -14,6 +14,10 @@ import javafx.scene.shape.Rectangle;
 public class Rect extends Shapes{
     private double Base;
     private double Heigth;
+    
+    private Color strokeColor;
+    private Color fillColor;
+    
     private Rectangle rect;
 
     public Rect(){
@@ -23,7 +27,27 @@ public class Rect extends Shapes{
         super(startPos, endPos, strockColor, fillColor);
         this.Base=calculateBase();
         this.Heigth=calculateHeigth();
+        setStrokeColor(strockColor);
+        setFillColor(fillColor);
     }
+
+    public Color getStrokeColor() {
+        return strokeColor;
+    }
+
+    public void setStrokeColor(Color strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
+    public Color getFillColor() {
+        return fillColor;
+    }
+
+    public void setFillColor(Color fillColor) {
+        this.fillColor = fillColor;
+    }
+    
+    
 
     private Double calculateBase() {
         double base=this.getPosition().getX()-this.getEndPosition().getX();
@@ -65,7 +89,10 @@ public class Rect extends Shapes{
     public void draw(Pane pane) {
         rect=new Rectangle(this.Base,this.Heigth,Color.TRANSPARENT);
         rect.relocate(this.getPosition().getX(),this.getPosition().getY());
-        rect.setStroke(Color.BLACK);
+        
+        rect.setStroke(getStrokeColor());
+        rect.setFill(getFillColor());
+        
         pane.getChildren().add(rect);
     }
 

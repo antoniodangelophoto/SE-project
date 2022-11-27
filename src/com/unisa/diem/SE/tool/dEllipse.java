@@ -102,8 +102,9 @@ public class dEllipse extends Shapes {
         ellipse.setCenterY(this.yCenter);
         ellipse.setRadiusX(this.xRadius);
         ellipse.setRadiusY(this.yRadius);
-        ellipse.setStroke(this.strokeColor);
-        ellipse.setFill(this.fillColor);
+        
+        ellipse.setStroke(getStrokeColor());
+        ellipse.setFill(getFillColor());
         
         pane.getChildren().add(ellipse);
     }

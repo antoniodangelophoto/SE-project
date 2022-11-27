@@ -71,6 +71,7 @@ public class LineSegment extends Shapes{
         
         line.setStroke(getStrokeColor());
         line.setFill(getFillColor());
+        
         pane.getChildren().add(line);
     }
 

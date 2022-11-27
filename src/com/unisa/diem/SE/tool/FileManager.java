@@ -72,7 +72,9 @@ public class FileManager {
                     s = new dEllipse();
                  
                 double startX = stringScanner.nextDouble();
+                System.out.println(startX);
                 double startY = stringScanner.nextDouble();
+                System.out.println(startY);
                 Point2D start = new Point2D(startX, startY);
                 double endX = stringScanner.nextDouble();
                 double endY = stringScanner.nextDouble();
@@ -88,6 +90,7 @@ public class FileManager {
                 //s.setColor(stroke);
                 
                 myArray.add(s);
+                //pane.getChildren().add(s);
                 s.draw(pane);
                 //Shape s = new ShapeFactory().createShape(shapeString);
                 //pane.getChildren().add(s);
