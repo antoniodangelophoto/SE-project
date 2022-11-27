@@ -4,10 +4,18 @@
  */
 package com.unisa.diem.SE.tool;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 /**
  *
  * @author antonio.dangelo.photo
  */
 public class dEllipseTest {
+    
+    @Test
+    public void testDraw(){
+        System.out.println("Test 1");
+    }
     
 }
