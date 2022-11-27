@@ -23,9 +23,9 @@ public class Shapes {
     private Color fillColor;
     //private String shapeString;
     private String type;
+    
     public Shapes(){
     }
-    
     public Shapes(Point2D startPos, Point2D endPos , Color strockColor, Color fillColor){
         this.color = strockColor;
         this.startPosition = startPos;

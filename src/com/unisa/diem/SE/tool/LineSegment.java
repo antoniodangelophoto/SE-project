@@ -38,9 +38,9 @@ public class LineSegment extends Shapes{
     
 
 
-    public LineSegment(Point2D start, Point2D end,Color strockColor, Color color){
-        super(start,end,strockColor,color);
-        setFillColor(color);
+    public LineSegment(Point2D start, Point2D end,Color strockColor, Color fillColor){
+        super(start,end,strockColor,fillColor);
+        setFillColor(fillColor);
         setStrokeColor(strockColor);
     }
 

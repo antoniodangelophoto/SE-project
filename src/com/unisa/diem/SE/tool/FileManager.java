@@ -24,7 +24,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
+import com.unisa.diem.SE.tool.*;
+//import javafx.scene.shape.Shape;
 
 /**
  *
@@ -44,7 +45,7 @@ public class FileManager {
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+ 
     }
 
     public void loadFile(String file, Pane pane){
@@ -60,26 +61,39 @@ public class FileManager {
                 //System.out.println(shapeString);
                 stringScanner.useLocale(Locale.US);
                 stringScanner.useDelimiter(",");
+                
                 Shapes s;
+                
                 if(stringScanner.next().equals("Line"))
                     s = new LineSegment();
                 else if(stringScanner.next().equals("Rectangle"))
                     s = new Rect();
                 else 
                     s = new dEllipse();
+                 
                 double startX = stringScanner.nextDouble();
                 double startY = stringScanner.nextDouble();
                 Point2D start = new Point2D(startX, startY);
                 double endX = stringScanner.nextDouble();
                 double endY = stringScanner.nextDouble();
                 Point2D end = new Point2D(endX, endY);
+                //Color stroke = Color.decode(stringScanner.next());
+                //Color fill = Color.decode(stringScanner.next());
+                stringScanner.nextDouble();
+                stringScanner.nextDouble();
                 s.setPosition(start);
                 s.setEndPosition(end);
+                
+                s.setFillColor(Color.BLACK);
+                //s.setColor(stroke);
+                
                 myArray.add(s);
+                s.draw(pane);
                 //Shape s = new ShapeFactory().createShape(shapeString);
                 //pane.getChildren().add(s);
 
             }
+            //pane.getChildren().add(s)
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
