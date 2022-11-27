@@ -110,7 +110,7 @@ public class dEllipse extends Shapes {
         pane.getChildren().add(ellipse);
     }
     
-    
+    /*
     public Shape draw(Pane pane, Point2D startPos, Point2D endPos, Color strokeColor, Color fillColor){
         ellipse=new Ellipse();
         setxRadius(Math.abs(startPos.getX() - endPos.getX()));
@@ -133,5 +133,5 @@ public class dEllipse extends Shapes {
         
         //pane.getChildren().add(ellipse);
         return ellipse;
-    }
+    }*/
 }
