@@ -21,7 +21,6 @@ public class Shapes {
     private Point2D topLeft;
     private Color color;
     private Color fillColor;
-    //private String shapeString;
     private String type;
     
     public Shapes(){
@@ -90,9 +89,7 @@ public class Shapes {
     public String toString() {
             return type+","+startPosition.getX()+","+startPosition.getY() + "," + endPosition.getX() + "," + endPosition.getY() + ","+ color + "," + fillColor + "\n";
         }
-    /*void setProperties(ArrayList<Shapes> s) {
-        
-    }*/
+
 
     
     
