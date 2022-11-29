@@ -24,15 +24,24 @@ public class Shapes {
     private String type;
     
     public Shapes(){
+
     }
+
+    public Shapes(Point2D startPos, Point2D endPos , Color color){
+        this.startPosition = startPos;
+        this.endPosition = endPos;
+        this.fillColor = color;
+        this.topLeft = calculateTopLeft();   
+    }
+
     public Shapes(Point2D startPos, Point2D endPos , Color strockColor, Color fillColor){
         this.color = strockColor;
         this.startPosition = startPos;
         this.endPosition = endPos;
         this.fillColor = fillColor;
-        this.topLeft = calculateTopLeft();
-        
+        this.topLeft = calculateTopLeft();   
     }
+
     public void setType(String type){
         this.type = type;
     }
