@@ -15,27 +15,15 @@ import javafx.scene.shape.Line;
  */
 public class LineSegment extends Shapes{
     
-    private Color strokeColor;
-    private Color fillColor;
+    private Color color;
 
-    public Color getStrokeColor() {
-        return strokeColor;
+    public Color getColor() {
+        return this.color;
     }
 
-    public void setStrokeColor(Color strokeColor) {
-        this.strokeColor = strokeColor;
+    public void setStrokeColor(Color color) {
+        this.color = color;
     }
-
-    public Color getFillColor() {
-        return fillColor;
-    }
-
-    public void setFillColor(Color fillColor) {
-        this.fillColor = fillColor;
-    }
-    
-    
-    
 
 
     public LineSegment(Point2D start, Point2D end,Color color){
@@ -68,9 +56,7 @@ public class LineSegment extends Shapes{
         line.setEndX(this.getEndPosition().getX());
         line.setEndY(this.getEndPosition().getY());
         
-        line.setStroke(getStrokeColor());
-        line.setFill(getFillColor());
-        
+        line.setStroke(getColor());
         pane.getChildren().add(line);
     }
 
