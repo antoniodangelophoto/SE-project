@@ -198,16 +198,16 @@ public class MainSceneController implements Initializable {
                 selSing.remove(shSel);
                 shSel=null;
                 
-            }else{
-                menuEnableSetitem();
-                selSing.set(shSel);
-                
-                if(copySing.getList().isEmpty())selMenu.getItems().get(3).disableProperty().set(true);
-                else selMenu.getItems().get(3).disableProperty().set(false);
-                shSel.setStroke(Color.RED);
-                shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
-                selMenu.show(shSel,Side.RIGHT,0 ,0);
-                }
+                }else{
+                    menuEnableSetitem();
+                    selSing.set(shSel);
+
+                    if(copySing.getList().isEmpty())selMenu.getItems().get(3).disableProperty().set(true);
+                    else selMenu.getItems().get(3).disableProperty().set(false);
+                    shSel.setStroke(Color.RED);
+                    shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
+                    selMenu.show(shSel,Side.RIGHT,0 ,0);
+                    }
             }else{
                 ColorSingle colorTemp=ColorSingle.getInstance();
                 for(Shape s: selSing.getList()){
