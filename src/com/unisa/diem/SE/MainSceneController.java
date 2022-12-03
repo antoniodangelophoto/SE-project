@@ -32,6 +32,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -90,6 +91,13 @@ public class MainSceneController implements Initializable {
     private boolean ellipse=false;
     private boolean line=false;
     private boolean selection=false;
+    
+    
+    // DEFINIZIONE PATTERN SINGLETON
+    
+    SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
+    CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
+    ColorSingle colorTemp;
    
     /**
      * Initializes the controller class.
@@ -160,9 +168,9 @@ public class MainSceneController implements Initializable {
     @FXML
     private void mouseUp(MouseEvent event) {
         end = new Point2D(event.getX(), event.getY());
-        
-        //controllo con quale tasto stiamo pigiando, principale per disegnare e secondario per il menu a nuvola
-        drawFunction();
+        if(event.getButton()==MouseButton.PRIMARY){
+            drawFunction();
+        }
     }
 
     @FXML
@@ -173,13 +181,35 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void mouseDown(MouseEvent event) {
-         start = new Point2D(event.getX(),event.getY());
+        
+        if(event.getButton()==MouseButton.PRIMARY){
+            start = new Point2D(event.getX(),event.getY());
+         
+        } else if(event.getButton()==MouseButton.SECONDARY){
+            Shape shSel;
+            shSel = (Shape)event.getTarget();
+            menuEnableSetitem();
+            selSing.set(shSel);
+
+            if(copySing.getList().isEmpty())selMenu.getItems().get(3).disableProperty().set(true);
+            else selMenu.getItems().get(3).disableProperty().set(false);
+
+            /*dropShadow.setRadius(5.0);
+            dropShadow.setOffsetX(3.0);
+            dropShadow.setOffsetY(3.0);
+            dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
+            shSel.setEffect(dropShadow);*/
+
+            //shSel.setStroke(Color.RED);
+            shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
+            selMenu.show(shSel,Side.RIGHT,0 ,0);
+        }
     }
 
     @FXML
     private void select(MouseEvent event) {
-        SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
-        CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
+        //SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
+        //CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
         Shape shSel;
         
         
@@ -188,8 +218,8 @@ public class MainSceneController implements Initializable {
                 // sto cliccando una shape
                 
                 shSel = (Shape)event.getTarget();                               //nella variabile singleton inserisco la shape di interesse
-                ColorSingle colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());   //Inizialize pattern singleton
-                
+                //ColorSingle colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());   //Inizialize pattern singleton
+                colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());   //Inizialize pattern singleton
                 selPosition= new Point2D(event.getX(),event.getY());
 
                     if(selSing.getList().contains(shSel) & shSel!=null ){       //se nella selezione c'è la shape di interesse
@@ -199,23 +229,23 @@ public class MainSceneController implements Initializable {
                         selSing.remove(shSel);
                         shSel=null;
                         
-                    }else{
+                    } /* else{
                         menuEnableSetitem();
                         selSing.set(shSel);
 
                         if(copySing.getList().isEmpty())selMenu.getItems().get(3).disableProperty().set(true);
                         else selMenu.getItems().get(3).disableProperty().set(false);
                         
-                        /*dropShadow.setRadius(5.0);
-                        dropShadow.setOffsetX(3.0);
-                        dropShadow.setOffsetY(3.0);
-                        dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
-                        shSel.setEffect(dropShadow);*/
+                        //dropShadow.setRadius(5.0);
+                        //dropShadow.setOffsetX(3.0);
+                        //dropShadow.setOffsetY(3.0);
+                        //dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
+                        //shSel.setEffect(dropShadow);
 
                         //shSel.setStroke(Color.RED);
                         shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
                         selMenu.show(shSel,Side.RIGHT,0 ,0);
-                    }
+                    }*/
                     
             }else{
                 
