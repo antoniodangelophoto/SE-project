@@ -21,7 +21,7 @@ public class SelectionSingleton{
         return selectionInstance;
     }
     private ArrayList<Shape> list;
-    public SelectionSingleton(){
+    private SelectionSingleton(){
         list=new ArrayList<Shape>();
     }
     public ArrayList<Shape> getList(){

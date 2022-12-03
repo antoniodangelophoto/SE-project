@@ -20,8 +20,12 @@ public class Move {
         });
 
         node.setOnMouseDragged(mouseEvent ->{
-            node.setLayoutX(mouseEvent.getSceneX() - pointX);
-            node.setLayoutY(mouseEvent.getSceneY() - pointY);
+            node.setLayoutX((mouseEvent.getSceneX() - pointX));
+            node.setLayoutY((mouseEvent.getSceneY() - pointY));
+            
+            //node.setLayoutX(mouseEvent.getSceneX());
+            //node.setLayoutY(mouseEvent.getSceneY());
+            
         });
     }
 

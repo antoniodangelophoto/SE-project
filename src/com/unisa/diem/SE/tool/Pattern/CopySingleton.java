@@ -20,7 +20,7 @@ public class CopySingleton {
         return copyInstance;
     }
     private ArrayList<Shape> list;
-    public CopySingleton(){
+    private CopySingleton(){
         list=new ArrayList<Shape>();
     }
     public ArrayList<Shape> getList(){

@@ -26,9 +26,9 @@ public class ColorSingle {
         return Instance;
     }
     private Color color;
-    public ColorSingle(){
+    private ColorSingle(){
     }
-    public ColorSingle(Color c){
+    private ColorSingle(Color c){
         color = c;
     }
     public void setColor(Color c){

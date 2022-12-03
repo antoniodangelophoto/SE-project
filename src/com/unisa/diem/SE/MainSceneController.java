@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.Stack;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -80,6 +81,9 @@ public class MainSceneController implements Initializable {
 
     Shapes shape = new Shapes();
     Move move = new Move();
+    ChangeColorFill changeColorFill;
+    ChangeColorStroke changeColorStroke;
+    
 
     private boolean rectangle=false;
     private boolean ellipse=false;
@@ -95,7 +99,6 @@ public class MainSceneController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         contextMenuInitialize();
             
-        
     }    
 
 
@@ -129,8 +132,6 @@ public class MainSceneController implements Initializable {
         ellipse=false;
         rectangle=false;
         line=false;
-        
-        
     }
 
     public void drawFunction(){
@@ -146,16 +147,13 @@ public class MainSceneController implements Initializable {
             sh.setType("Rectangle");
             sh.draw(Pane);
             ShapeList.add(sh);
+            
         }if(line){
             sh=new LineSegment(start,end,StrokeColor.getValue());
             sh.setType("Line");
             sh.draw(Pane);
             ShapeList.add(sh);
-        } else {
-            
-        }
-        
-        
+        } 
     }
 
     @FXML
@@ -179,41 +177,47 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void select(MouseEvent event) {
-        SelectionSingleton selSing=SelectionSingleton.getInstance();
-        CopySingleton copySing=CopySingleton.getInstance();
+        SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
+        CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
         Shape shSel;
         
         
         if(selection){
             if(!(event.getTarget().equals(Pane))){
-            shSel = (Shape)event.getTarget();
-            ColorSingle colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());           
-            selPosition= new Point2D(event.getX(),event.getY());
-            
-            
-            if(selSing.getList().contains(shSel) & shSel!=null ){
+                // sto cliccando una shape
                 
-                shSel.setStrokeDashOffset(0);
-                shSel.setStroke(colorTemp.getColor());
-                selSing.remove(shSel);
-                shSel=null;
+                shSel = (Shape)event.getTarget();                               //nella variabile singleton inserisco la shape di interesse
+                ColorSingle colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());   //Inizialize pattern singleton
                 
-                }else{
-                    menuEnableSetitem();
-                    selSing.set(shSel);
+                selPosition= new Point2D(event.getX(),event.getY());
 
-                    if(copySing.getList().isEmpty())selMenu.getItems().get(3).disableProperty().set(true);
-                    else selMenu.getItems().get(3).disableProperty().set(false);
-                    shSel.setStroke(Color.RED);
-                    shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
-                    selMenu.show(shSel,Side.RIGHT,0 ,0);
+                    if(selSing.getList().contains(shSel) & shSel!=null ){       //se nella selezione c'è la shape di interesse
+
+                        shSel.setStrokeDashOffset(0);
+                        shSel.setStroke(colorTemp.getColor());
+                        selSing.remove(shSel);
+                        shSel=null;
+
+                    }else{
+                        menuEnableSetitem();
+                        selSing.set(shSel);
+
+                        if(copySing.getList().isEmpty())selMenu.getItems().get(3).disableProperty().set(true);
+                        else selMenu.getItems().get(3).disableProperty().set(false);
+                        shSel.setStroke(Color.RED);
+                        shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
+                        selMenu.show(shSel,Side.RIGHT,0 ,0);
                     }
+                    
             }else{
+                
                 ColorSingle colorTemp=ColorSingle.getInstance();
+                
                 for(Shape s: selSing.getList()){
                     s.setStroke(colorTemp.getColor());
                     s.setStrokeDashOffset(0);;
                 }
+                
                 shSel=null;
                 selSing.clear();
                 
@@ -221,16 +225,21 @@ public class MainSceneController implements Initializable {
                     menuEnableSetitem();
                 else 
                     menuDisableSetitem();
-                if(copySing.getList().isEmpty())selMenu.getItems().get(3).disableProperty().set(true);
-                else selMenu.getItems().get(3).disableProperty().set(false);
+
+                if(copySing.getList().isEmpty())
+                    selMenu.getItems().get(3).disableProperty().set(true);
+                else 
+                    selMenu.getItems().get(3).disableProperty().set(false);
+                    
                 selPosition= new Point2D(event.getX(),event.getY());
                 selMenu.show(Pane, event.getScreenX(),event.getScreenY());
                 return;    
             }
+            //changeColorFill.execute();
+            //changeColorStroke.execute();
+            move.moveShape(shSel);
             
-         move.moveShape(shSel);
         }else{
-            
             selSing.clear();
             shSel=null;
         }
@@ -242,7 +251,7 @@ public class MainSceneController implements Initializable {
     public void importFile(ActionEvent event) throws IOException{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open resource file");
-        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt", "*.xml"));
+        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.xml"));
         String file = fileChooser.showOpenDialog(null).getPath();
         if(file!=null){
             FileManager fm = new FileManager();
@@ -269,22 +278,26 @@ public class MainSceneController implements Initializable {
         MenuItem delete=new MenuItem("delete");
         MenuItem paste=new MenuItem("paste");
         MenuItem selectOther=new MenuItem("Select Other..");
+        
         cut.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e){
-                
+                cop();
+                del();
                 
             }
                     
         });
+        
         copy.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e){
                 cop();
             }
                     
         });
+        
         delete.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e){
-                
+                del();
             }
                     
         });
@@ -316,9 +329,12 @@ public class MainSceneController implements Initializable {
         }
         
         public void del(){
-             
+             SelectionSingleton selectedShape = SelectionSingleton.getInstance();
+             Pane.getChildren().removeAll(selectedShape.getList());
+             selectedShape.clear();
              
         }
+        
         public void cop(){
              CopySingleton copySing=CopySingleton.getInstance();
              SelectionSingleton selectedShape= SelectionSingleton.getInstance();
@@ -331,6 +347,7 @@ public class MainSceneController implements Initializable {
         selMenu.getItems().get(1).disableProperty().set(false);
         selMenu.getItems().get(2).disableProperty().set(false);
     }
+    
     private void menuDisableSetitem() {
         selMenu.getItems().get(0).disableProperty().set(true);
         selMenu.getItems().get(1).disableProperty().set(true);
