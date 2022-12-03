@@ -56,13 +56,13 @@ public class MainSceneController implements Initializable {
     @FXML
     private Button segmentMode;
     @FXML
+    private Button moveMode;
+    @FXML
     private ComboBox<?> customShape;
     @FXML
     private ColorPicker StrokeColor;
     @FXML
     private ColorPicker FillColor;
-    @FXML
-    private Button selectionMode;
     @FXML
     private MenuItem Import;
     @FXML
@@ -93,10 +93,10 @@ public class MainSceneController implements Initializable {
     ChangeColorStroke changeColorStroke;
     //DropShadow dropShadow = new DropShadow();
 
-    private boolean rectangle=false;
-    private boolean ellipse=false;
-    private boolean line=false;
-    private boolean selection=false;
+    private boolean rectangleMod=false;
+    private boolean ellipseMod=false;
+    private boolean lineMod=false;
+    private boolean moveMod=false;
     
     
     // DEFINIZIONE PATTERN SINGLETON
@@ -105,8 +105,7 @@ public class MainSceneController implements Initializable {
     CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
     ColorSingle colorTemp;
     
-    
-    
+     
    
     /**
      * Initializes the controller class.
@@ -122,51 +121,51 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void rectangleMode(ActionEvent event) {
-        ellipse=false;
-        rectangle=true;
-        line=false;
-        selection=false;
+        ellipseMod=false;
+        rectangleMod=true;
+        lineMod=false;
+        moveMod=false;
     }
 
     @FXML
     private void ellipseMode(ActionEvent event) {
-        ellipse=true;
-        rectangle=false;
-        line=false;
-        selection=false;
+        ellipseMod=true;
+        rectangleMod=false;
+        lineMod=false;
+        moveMod=false;
     }
 
     @FXML
     private void lineMode(ActionEvent event) {
-        ellipse=false;
-        rectangle=false;
-        line=true;
-        selection=false;
+        ellipseMod=false;
+        rectangleMod=false;
+        lineMod=true;
+        moveMod=false;
     }
 
     @FXML
-    private void selectionMode(ActionEvent event) {
-        selection=true;
-        ellipse=false;
-        rectangle=false;
-        line=false;
+    private void moveMode(ActionEvent event) {
+        moveMod=true;
+        ellipseMod=false;
+        rectangleMod=false;
+        lineMod=false;
     }
 
     public void drawFunction(){
         Shapes sh;
-        if(ellipse){
+        if(ellipseMod){
             sh=new dEllipse(start,end,StrokeColor.getValue(),FillColor.getValue());
             sh.setType("Ellipse");
             sh.draw(Pane);
             ShapeList.add(sh);
 
-        }if(rectangle){
+        }if(rectangleMod){
             sh=new Rect(start,end,StrokeColor.getValue(),FillColor.getValue());
             sh.setType("Rectangle");
             sh.draw(Pane);
             ShapeList.add(sh);
             
-        }if(line){
+        }if(lineMod){
             sh=new LineSegment(start,end,StrokeColor.getValue());
             sh.setType("Line");
             sh.draw(Pane);
@@ -222,13 +221,13 @@ public class MainSceneController implements Initializable {
         Shape shSel;
         
         
-        if(selection){
+        if(moveMod){
             if(!(event.getTarget().equals(Pane))){
                 // sto cliccando una shape
                 
-                shSel = (Shape)event.getTarget();                               //nella variabile singleton inserisco la shape di interesse
-                //ColorSingle colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());   //Inizialize pattern singleton
-                colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());   //Inizialize pattern singleton
+                shSel = (Shape)event.getTarget();                                               //nella variabile singleton inserisco la shape di interesse
+                //ColorSingle colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());     //Inizialize pattern singleton
+                colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());                   //Inizialize pattern singleton
                 selPosition= new Point2D(event.getX(),event.getY());
 
                     if(selSing.getList().contains(shSel) & shSel!=null ){       //se nella selezione c'è la shape di interesse
@@ -261,7 +260,7 @@ public class MainSceneController implements Initializable {
                 ColorSingle colorTemp=ColorSingle.getInstance();
                 for(Shape s: selSing.getList()){
                     s.setStroke(colorTemp.getColor());
-                    s.setStrokeDashOffset(0);;
+                    s.setStrokeDashOffset(0);
                 }
                 
                 shSel=null;
@@ -399,6 +398,10 @@ public class MainSceneController implements Initializable {
         selMenu.getItems().get(0).disableProperty().set(true);
         selMenu.getItems().get(1).disableProperty().set(true);
         selMenu.getItems().get(2).disableProperty().set(true);
+    }
+
+    @FXML
+    private void customShapeAction(ActionEvent event) {
     }
 
 

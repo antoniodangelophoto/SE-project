@@ -34,8 +34,8 @@
                               <Color />
                            </value></ColorPicker>
                         <ColorPicker fx:id="FillColor" />
-                        <ComboBox fx:id="customShape" onAction="#selectionMode" prefHeight="32.0" prefWidth="127.0" promptText="CustomShapeWIP" />
-                        <Button fx:id="selectionMode" mnemonicParsing="false" onAction="#selectionMode" prefHeight="31.0" prefWidth="111.0" text="Select" />
+                        <ComboBox fx:id="customShape" onAction="#customShapeAction" prefHeight="32.0" prefWidth="158.0" promptText="CustomShapeWIP" />
+                        <Button fx:id="moveMode" mnemonicParsing="false" onAction="#moveMode" prefHeight="31.0" prefWidth="66.0" text="Move" />
                      </items>
                   </ToolBar>
                </children>
