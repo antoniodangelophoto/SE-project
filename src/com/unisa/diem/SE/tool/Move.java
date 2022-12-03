@@ -18,8 +18,8 @@ public class Move {
         node.setOnMousePressed(mouseEvent ->{
             anchorX = mouseEvent.getSceneX();
             anchorY = mouseEvent.getSceneY();
-            pointX = mouseEvent.getX();
-            pointY = mouseEvent.getY();
+            pointX = mouseEvent.getX() + 1;
+            pointY = mouseEvent.getY() + 108;
         });
         node.setOnMouseReleased(mouseEvent ->{
             node.setLayoutX((mouseEvent.getSceneX() - pointX));

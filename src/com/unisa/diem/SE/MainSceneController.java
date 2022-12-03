@@ -281,7 +281,7 @@ public class MainSceneController implements Initializable {
             
         }
 
-        move.moveShape(shSel);
+        move.moveShape(shSel.getParent());
     
     }
     
