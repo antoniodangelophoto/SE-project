@@ -105,6 +105,7 @@ public class MainSceneController implements Initializable {
     CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
     ColorSingle colorTemp;
     
+    Shape shSel;
      
    
     /**
@@ -191,72 +192,52 @@ public class MainSceneController implements Initializable {
     private void mouseDown(MouseEvent event) {
         
         if(event.getButton()==MouseButton.PRIMARY){
-            start = new Point2D(event.getX(),event.getY());
+            if(moveMod){
+                shSel = (Shape)event.getTarget();
+            }else{
+                start = new Point2D(event.getX(),event.getY());
+            }
          
         } else if(event.getButton()==MouseButton.SECONDARY){
-            Shape shSel;
-            shSel = (Shape)event.getTarget();
-            menuEnableSetitem();
-            selSing.set(shSel);
-
-            if(copySing.getList().isEmpty())selMenu.getItems().get(3).disableProperty().set(true);
-            else selMenu.getItems().get(3).disableProperty().set(false);
-
-            /*dropShadow.setRadius(5.0);
-            dropShadow.setOffsetX(3.0);
-            dropShadow.setOffsetY(3.0);
-            dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
-            shSel.setEffect(dropShadow);*/
-
-            //shSel.setStroke(Color.RED);
-            shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
-            selMenu.show(shSel,Side.RIGHT,0 ,0);
-        }
-    }
-
-    @FXML
-    private void select(MouseEvent event) {
-        //SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
-        //CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
-        Shape shSel;
-        
-        
-        if(moveMod){
+            
+            //Shape shSel;
+            
+            
             if(!(event.getTarget().equals(Pane))){
-                // sto cliccando una shape
                 
-                shSel = (Shape)event.getTarget();                                               //nella variabile singleton inserisco la shape di interesse
-                //ColorSingle colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());     //Inizialize pattern singleton
-                colorTemp=ColorSingle.getInstance((Color) shSel.getStroke());                   //Inizialize pattern singleton
-                selPosition= new Point2D(event.getX(),event.getY());
+                shSel = (Shape)event.getTarget();
+                colorTemp=ColorSingle.getInstance((Color) shSel.getStroke()); 
+                
+                if(selSing.getList().contains(shSel) & shSel!=null ){       //se la shape è già selezionata, la vado a delezionare
 
-                    if(selSing.getList().contains(shSel) & shSel!=null ){       //se nella selezione c'è la shape di interesse
+                    shSel.setStrokeDashOffset(0); //rimuovo tratteggio
+                    shSel.setStroke(colorTemp.getColor());
+                    selSing.remove(shSel);
+                    shSel=null;
 
-                        shSel.setStrokeDashOffset(0);
-                        shSel.setStroke(colorTemp.getColor());
-                        selSing.remove(shSel);
-                        shSel=null;
-                        
-                    } /* else{
-                        menuEnableSetitem();
-                        selSing.set(shSel);
+                }else{
+                    menuEnableSetitem();
+                    selSing.set(shSel);
 
-                        if(copySing.getList().isEmpty())selMenu.getItems().get(3).disableProperty().set(true);
-                        else selMenu.getItems().get(3).disableProperty().set(false);
-                        
-                        //dropShadow.setRadius(5.0);
-                        //dropShadow.setOffsetX(3.0);
-                        //dropShadow.setOffsetY(3.0);
-                        //dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
-                        //shSel.setEffect(dropShadow);
+                    if(copySing.getList().isEmpty()){
+                        selMenu.getItems().get(3).disableProperty().set(true);
+                    }else{
+                        selMenu.getItems().get(3).disableProperty().set(false);
+                    }
 
-                        //shSel.setStroke(Color.RED);
-                        shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
-                        selMenu.show(shSel,Side.RIGHT,0 ,0);
-                    }*/
-                    
+                    /*dropShadow.setRadius(5.0);
+                    dropShadow.setOffsetX(3.0);
+                    dropShadow.setOffsetY(3.0);
+                    dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
+                    shSel.setEffect(dropShadow);*/
+
+                    //shSel.setStroke(Color.RED);
+                    shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
+                    selMenu.show(shSel,Side.RIGHT,0 ,0);
+                }
+                
             }else{
-                
+                System.out.println("PANE moveMODE");
                 ColorSingle colorTemp=ColorSingle.getInstance();
                 for(Shape s: selSing.getList()){
                     s.setStroke(colorTemp.getColor());
@@ -265,11 +246,12 @@ public class MainSceneController implements Initializable {
                 
                 shSel=null;
                 selSing.clear();
-                if(selSing.getList().isEmpty())
+                if(selSing.getList().isEmpty()){
                     menuEnableSetitem();
-                else 
+                }else{ 
                     menuDisableSetitem();
-
+                }
+                
                 if(copySing.getList().isEmpty())
                     selMenu.getItems().get(3).disableProperty().set(true);
                 else 
@@ -277,20 +259,19 @@ public class MainSceneController implements Initializable {
                     
                 selPosition= new Point2D(event.getX(),event.getY());
                 selMenu.show(Pane, event.getScreenX(),event.getScreenY());
-                return;    
+                return;
             }
-            //changeColorFill.execute();
-            //changeColorStroke.execute();
-            
-            
-        }else{
-            selSing.clear();
-            shSel=null;
             
         }
+    }
+
+    @FXML
+    private void selectMove(MouseEvent event) {
         
-        move.moveShape(shSel,ToolBarMenu.getHeight());
-    
+        if(moveMod){
+            move.moveShape(shSel,ToolBarMenu.getHeight());
+        }
+        
     }
     
     @FXML
