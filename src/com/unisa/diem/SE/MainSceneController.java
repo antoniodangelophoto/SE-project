@@ -31,6 +31,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -83,7 +84,7 @@ public class MainSceneController implements Initializable {
     Move move = new Move();
     ChangeColorFill changeColorFill;
     ChangeColorStroke changeColorStroke;
-    
+    //DropShadow dropShadow = new DropShadow();
 
     private boolean rectangle=false;
     private boolean ellipse=false;
@@ -98,7 +99,7 @@ public class MainSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         contextMenuInitialize();
-            
+        
     }    
 
 
@@ -197,14 +198,21 @@ public class MainSceneController implements Initializable {
                         shSel.setStroke(colorTemp.getColor());
                         selSing.remove(shSel);
                         shSel=null;
-
+                        
                     }else{
                         menuEnableSetitem();
                         selSing.set(shSel);
 
                         if(copySing.getList().isEmpty())selMenu.getItems().get(3).disableProperty().set(true);
                         else selMenu.getItems().get(3).disableProperty().set(false);
-                        shSel.setStroke(Color.RED);
+                        
+                        /*dropShadow.setRadius(5.0);
+                        dropShadow.setOffsetX(3.0);
+                        dropShadow.setOffsetY(3.0);
+                        dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
+                        shSel.setEffect(dropShadow);*/
+
+                        //shSel.setStroke(Color.RED);
                         shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
                         selMenu.show(shSel,Side.RIGHT,0 ,0);
                     }
@@ -212,7 +220,6 @@ public class MainSceneController implements Initializable {
             }else{
                 
                 ColorSingle colorTemp=ColorSingle.getInstance();
-                
                 for(Shape s: selSing.getList()){
                     s.setStroke(colorTemp.getColor());
                     s.setStrokeDashOffset(0);;
@@ -220,7 +227,6 @@ public class MainSceneController implements Initializable {
                 
                 shSel=null;
                 selSing.clear();
-                
                 if(selSing.getList().isEmpty())
                     menuEnableSetitem();
                 else 
@@ -237,13 +243,15 @@ public class MainSceneController implements Initializable {
             }
             //changeColorFill.execute();
             //changeColorStroke.execute();
-            move.moveShape(shSel);
+            
             
         }else{
             selSing.clear();
             shSel=null;
+            
         }
-        
+
+        move.moveShape(shSel);
     
     }
     

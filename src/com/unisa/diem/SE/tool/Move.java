@@ -11,17 +11,27 @@ import javafx.scene.Node;
 public class Move {
     private double pointX;
     private double pointY;
-
+    private double anchorX;
+    private double anchorY;
     public void moveShape(Node node){
 
         node.setOnMousePressed(mouseEvent ->{
+            anchorX = mouseEvent.getSceneX();
+            anchorY = mouseEvent.getSceneY();
             pointX = mouseEvent.getX();
             pointY = mouseEvent.getY();
         });
-
-        node.setOnMouseDragged(mouseEvent ->{
+        node.setOnMouseReleased(mouseEvent ->{
             node.setLayoutX((mouseEvent.getSceneX() - pointX));
             node.setLayoutY((mouseEvent.getSceneY() - pointY));
+            node.setTranslateX(0);
+            node.setTranslateY(0);
+            //node.setLayoutX(mouseEvent.getSceneX());
+            //node.setLayoutY(mouseEvent.getSceneY()); 
+        });
+        node.setOnMouseDragged(mouseEvent ->{
+            node.setTranslateX((mouseEvent.getSceneX() - anchorX));
+            node.setTranslateY((mouseEvent.getSceneY() - anchorY));
             
             //node.setLayoutX(mouseEvent.getSceneX());
             //node.setLayoutY(mouseEvent.getSceneY());
