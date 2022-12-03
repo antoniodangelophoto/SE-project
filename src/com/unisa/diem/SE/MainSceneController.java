@@ -88,7 +88,7 @@ public class MainSceneController implements Initializable {
     private ArrayList<Shapes> ShapeList = new ArrayList<Shapes>();
 
     Shapes shape = new Shapes();
-    Move move = new Move();
+    Move move=new Move();
     ChangeColorFill changeColorFill;
     ChangeColorStroke changeColorStroke;
     //DropShadow dropShadow = new DropShadow();
@@ -210,8 +210,9 @@ public class MainSceneController implements Initializable {
                 
                 if(selSing.getList().contains(shSel) & shSel!=null ){       //se la shape è già selezionata, la vado a delezionare
 
-                    shSel.setStrokeDashOffset(0); //rimuovo tratteggio
+                    shSel.getStrokeDashArray().clear(); //rimuovo tratteggio
                     shSel.setStroke(colorTemp.getColor());
+                    selMenu.hide();
                     selSing.remove(shSel);
                     shSel=null;
 
@@ -233,6 +234,7 @@ public class MainSceneController implements Initializable {
 
                     //shSel.setStroke(Color.RED);
                     shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
+                    
                     selMenu.show(shSel,Side.RIGHT,0 ,0);
                 }
                 
@@ -241,7 +243,7 @@ public class MainSceneController implements Initializable {
                 ColorSingle colorTemp=ColorSingle.getInstance();
                 for(Shape s: selSing.getList()){
                     s.setStroke(colorTemp.getColor());
-                    s.setStrokeDashOffset(0);
+                    s.getStrokeDashArray().clear();
                 }
                 
                 shSel=null;
@@ -267,7 +269,6 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void selectMove(MouseEvent event) {
-        
         if(moveMod){
             move.moveShape(shSel,ToolBarMenu.getHeight());
         }
@@ -334,8 +335,8 @@ public class MainSceneController implements Initializable {
                 Shape Copy;
                 CopySingleton copySing=CopySingleton.getInstance();
                 for(Shape s: copySing.getList()){
+                    s.getStrokeDashArray().clear();
                     Copy = s;
-                    
                     Point2D tempPos= new Point2D(s.getLayoutX(),s.getLayoutY());
                     Shape temp=Shape.union(s, Copy);
                     
@@ -366,6 +367,7 @@ public class MainSceneController implements Initializable {
              CopySingleton copySing=CopySingleton.getInstance();
              SelectionSingleton selectedShape= SelectionSingleton.getInstance();
              copySing.setAll(selectedShape.getList());
+             
              
         }
 

@@ -32,6 +32,8 @@ public class Move {
             node.setTranslateY((mouseEvent.getSceneY() - anchorY));
             
         });
+        
     }
+    
 
 }
