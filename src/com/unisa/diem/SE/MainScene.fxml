@@ -18,7 +18,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <ToolBar prefHeight="80.0" prefWidth="860.0">
+                  <ToolBar fx:id="ToolBarMenu" prefHeight="80.0" prefWidth="860.0">
                      <items>
                         <MenuButton mnemonicParsing="false" text="File">
                            <items>
@@ -40,7 +40,7 @@
                   </ToolBar>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="411.0" prefWidth="808.0">
+          <AnchorPane fx:id="AnchorPane2" minHeight="0.0" minWidth="0.0" prefHeight="411.0" prefWidth="808.0">
                <children>
                   <Pane id="drawingPane" fx:id="Pane" layoutX="-1.0" layoutY="-1.0" onDragDetected="#setLine" onMouseClicked="#select" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" prefHeight="494.0" prefWidth="860.0" />
                </children></AnchorPane>

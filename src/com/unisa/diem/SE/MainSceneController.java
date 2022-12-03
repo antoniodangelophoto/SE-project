@@ -31,8 +31,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ToolBar;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -67,6 +69,10 @@ public class MainSceneController implements Initializable {
     private MenuItem Export;
     @FXML
     private Pane Pane;
+    @FXML
+    private ToolBar ToolBarMenu;
+    @FXML
+    private AnchorPane AnchorPane2;
 
 
     //private Stack primary = new Stack<ArrayList<Shapes>>();
@@ -98,6 +104,9 @@ public class MainSceneController implements Initializable {
     SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
     CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
     ColorSingle colorTemp;
+    
+    
+    
    
     /**
      * Initializes the controller class.
@@ -280,8 +289,8 @@ public class MainSceneController implements Initializable {
             shSel=null;
             
         }
-
-        move.moveShape(shSel.getParent());
+        
+        move.moveShape(shSel,ToolBarMenu.getHeight());
     
     }
     

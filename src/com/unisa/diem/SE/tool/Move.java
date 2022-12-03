@@ -13,13 +13,13 @@ public class Move {
     private double pointY;
     private double anchorX;
     private double anchorY;
-    public void moveShape(Node node){
+    public void moveShape(Node node, Double height){
 
         node.setOnMousePressed(mouseEvent ->{
             anchorX = mouseEvent.getSceneX();
             anchorY = mouseEvent.getSceneY();
-            pointX = mouseEvent.getX() + 1;
-            pointY = mouseEvent.getY() + 108;
+            pointX = mouseEvent.getX() + 0;
+            pointY = mouseEvent.getY() + height + 30; //111
         });
         node.setOnMouseReleased(mouseEvent ->{
             node.setLayoutX((mouseEvent.getSceneX() - pointX));
