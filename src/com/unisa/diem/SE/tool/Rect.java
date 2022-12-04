@@ -96,10 +96,9 @@ public class Rect extends Shapes{
         pane.getChildren().add(rect);
     }
 
-    
-    
-    
-
-    
-    
+    @Override
+    public String toString() {
+        return "Rectangle,"+this.getPosition().getX()+","+this.getPosition().getY() + "," + this.getEndPosition().getX() + "," + this.getEndPosition().getY() + ","+ this.getColor() + ","+ this.getFillColor() +"\n";
+    }
+      
 }

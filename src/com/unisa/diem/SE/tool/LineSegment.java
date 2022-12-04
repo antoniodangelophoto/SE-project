@@ -60,6 +60,11 @@ public class LineSegment extends Shapes{
         pane.getChildren().add(line);
     }
 
+    @Override
+    public String toString() {
+        return "Line,"+this.getPosition().getX()+","+this.getPosition().getY() + "," + this.getEndPosition().getX() + "," + this.getEndPosition().getY() + ","+ color + "\n";
+    }
+
     
 }
 

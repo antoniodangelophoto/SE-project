@@ -134,5 +134,9 @@ public class dEllipse extends Shapes {
         //pane.getChildren().add(ellipse);
         return ellipse;
     }*/
+    @Override
+    public String toString() {
+        return "Ellipse,"+this.getPosition().getX()+","+this.getPosition().getY() + "," + this.getEndPosition().getX() + "," + this.getEndPosition().getY() + ","+ this.getColor() + ","+ this.getFillColor() +"\n";
+    }
 
 }
