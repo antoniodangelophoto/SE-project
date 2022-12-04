@@ -1,6 +1,8 @@
 
 package com.unisa.diem.SE;
 
+import com.unisa.diem.SE.tool.Pattern.CommandExecutor;
+import com.unisa.diem.SE.tool.Pattern.Command;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -311,13 +313,13 @@ public class MainSceneController implements Initializable {
         MenuItem delete=new MenuItem("delete");
         MenuItem paste=new MenuItem("paste");
         MenuItem changeFillColor= new MenuItem("Change Fill Color");
+        MenuItem changeStrokeColor= new MenuItem("Change Stroke Color");
         MenuItem selectOther=new MenuItem("Select Other..");
         
         cut.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e){
                 cop();
                 del();
-                
             }
                     
         });
@@ -363,12 +365,20 @@ public class MainSceneController implements Initializable {
         changeFillColor.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
-                
                 Command fillCommand= new ChangeColorFill(FillColor.valueProperty());
                 commExe.execute(fillCommand);
             }
         });
-        selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,selectOther);
+        
+        changeStrokeColor.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                Command strokeCommand = new ChangeColorStroke(StrokeColor.valueProperty());
+                commExe.execute(strokeCommand);
+            }
+        });
+        
+        selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,changeStrokeColor,selectOther);
             
         }
         

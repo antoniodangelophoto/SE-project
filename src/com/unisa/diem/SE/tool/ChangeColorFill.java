@@ -1,5 +1,6 @@
 package com.unisa.diem.SE.tool;
 
+import com.unisa.diem.SE.tool.Pattern.Command;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;

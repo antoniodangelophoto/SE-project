@@ -1,5 +1,5 @@
 
-package com.unisa.diem.SE.tool;
+package com.unisa.diem.SE.tool.Pattern;
 
 /**
  *

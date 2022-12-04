@@ -1,5 +1,7 @@
 package com.unisa.diem.SE.tool;
 
+import com.unisa.diem.SE.tool.Pattern.Command;
+import com.unisa.diem.SE.tool.Pattern.SelectionSingleton;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -12,8 +14,7 @@ public class ChangeColorStroke implements Command{
     
     private ObjectProperty strokeColPick;
     private Color previousColor;
-    private SelectedShape selShape = SelectedShape.getInstance();
-    private Shape shape;
+    private SelectionSingleton selSing = SelectionSingleton.getInstance();
     
     public ChangeColorStroke(ObjectProperty strokeColPick){
         this.strokeColPick = strokeColPick;
@@ -21,19 +22,20 @@ public class ChangeColorStroke implements Command{
     
     @Override
     public void execute(){
-        shape = selShape.getShapeSel();
-        if(shape!=null){
-            shape.getStyleClass().remove("selectBorder");
-            previousColor = (Color) shape.getStroke();
-            shape.setStroke((Color) strokeColPick.getValue());
-            selShape.setShapeSel(null);
+        for(Shape s:selSing.getList()){
+          if(s!=null){
+             s.getStrokeDashArray().clear();
+             previousColor = (Color) s.getStroke();
+             s.setStroke((Color) strokeColPick.getValue());
             
+          }
         }
+        selSing.clear();
     }
-    
     @Override
     public void undo(){
-        shape.setStroke(previousColor);
+        for(Shape s:selSing.getList())
+            s.setStroke(previousColor);
     }
     
     
