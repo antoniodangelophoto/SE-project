@@ -14,6 +14,7 @@ import javafx.geometry.Point2D;
 import com.unisa.diem.SE.tool.*;
 import com.unisa.diem.SE.tool.Pattern.ColorSingle;
 import com.unisa.diem.SE.tool.Pattern.CopySingleton;
+import com.unisa.diem.SE.tool.Pattern.MoveSingleton;
 import com.unisa.diem.SE.tool.Pattern.SelectionSingleton;
 import java.io.File;
 import java.io.IOException;
@@ -96,11 +97,12 @@ public class MainSceneController implements Initializable {
     private boolean rectangleMod=false;
     private boolean ellipseMod=false;
     private boolean lineMod=false;
-    private boolean moveMod=false;
     
+    //PATTERN COMMAND
+    CommandExecutor commExe= new CommandExecutor();
     
     // DEFINIZIONE PATTERN SINGLETON
-    
+    MoveSingleton moveProp=MoveSingleton.getInstance();
     SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
     CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
     ColorSingle colorTemp;
@@ -125,7 +127,7 @@ public class MainSceneController implements Initializable {
         ellipseMod=false;
         rectangleMod=true;
         lineMod=false;
-        moveMod=false;
+        moveProp.moveSetFalse();
     }
 
     @FXML
@@ -133,7 +135,7 @@ public class MainSceneController implements Initializable {
         ellipseMod=true;
         rectangleMod=false;
         lineMod=false;
-        moveMod=false;
+        moveProp.moveSetFalse();
     }
 
     @FXML
@@ -141,12 +143,12 @@ public class MainSceneController implements Initializable {
         ellipseMod=false;
         rectangleMod=false;
         lineMod=true;
-        moveMod=false;
+        moveProp.moveSetFalse();
     }
 
     @FXML
     private void moveMode(ActionEvent event) {
-        moveMod=true;
+        moveProp.moveSetTrue();
         ellipseMod=false;
         rectangleMod=false;
         lineMod=false;
@@ -192,7 +194,8 @@ public class MainSceneController implements Initializable {
     private void mouseDown(MouseEvent event) {
         
         if(event.getButton()==MouseButton.PRIMARY){
-            if(moveMod){
+            
+            if(moveProp.getMoveProp()){
                 shSel = (Shape)event.getTarget();
             }else{
                 start = new Point2D(event.getX(),event.getY());
@@ -201,7 +204,6 @@ public class MainSceneController implements Initializable {
         } else if(event.getButton()==MouseButton.SECONDARY){
             
             //Shape shSel;
-            
             
             if(!(event.getTarget().equals(Pane))){
                 
@@ -239,6 +241,7 @@ public class MainSceneController implements Initializable {
                 }
                 
             }else{
+                
                 System.out.println("PANE moveMODE");
                 ColorSingle colorTemp=ColorSingle.getInstance();
                 for(Shape s: selSing.getList()){
@@ -249,9 +252,9 @@ public class MainSceneController implements Initializable {
                 shSel=null;
                 selSing.clear();
                 if(selSing.getList().isEmpty()){
-                    menuEnableSetitem();
-                }else{ 
                     menuDisableSetitem();
+                }else{ 
+                    menuEnableSetitem();
                 }
                 
                 if(copySing.getList().isEmpty())
@@ -269,9 +272,11 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void selectMove(MouseEvent event) {
-        if(moveMod){
-            move.moveShape(shSel,ToolBarMenu.getHeight());
-        }
+        
+            if(moveProp.getMoveProp()){
+                move.moveShape(shSel,ToolBarMenu.getHeight());
+            
+            }
         
     }
     
@@ -305,6 +310,7 @@ public class MainSceneController implements Initializable {
         MenuItem copy=new MenuItem("copy");
         MenuItem delete=new MenuItem("delete");
         MenuItem paste=new MenuItem("paste");
+        MenuItem changeFillColor= new MenuItem("Change Fill Color");
         MenuItem selectOther=new MenuItem("Select Other..");
         
         cut.setOnAction(new EventHandler<ActionEvent>(){
@@ -317,6 +323,7 @@ public class MainSceneController implements Initializable {
         });
         
         copy.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
             public void handle(ActionEvent e){
                 cop();
             }
@@ -324,6 +331,7 @@ public class MainSceneController implements Initializable {
         });
         
         delete.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
             public void handle(ActionEvent e){
                 del();
             }
@@ -331,6 +339,7 @@ public class MainSceneController implements Initializable {
         });
         
         paste.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
             public void handle(ActionEvent e){
                 Shape Copy;
                 CopySingleton copySing=CopySingleton.getInstance();
@@ -351,8 +360,15 @@ public class MainSceneController implements Initializable {
                     
             }        
         });
-        
-        selMenu.getItems().addAll(cut,copy,delete,paste,selectOther);
+        changeFillColor.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                
+                Command fillCommand= new ChangeColorFill(FillColor.valueProperty());
+                commExe.execute(fillCommand);
+            }
+        });
+        selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,selectOther);
             
         }
         

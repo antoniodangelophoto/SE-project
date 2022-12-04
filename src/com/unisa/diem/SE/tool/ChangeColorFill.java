@@ -3,7 +3,7 @@ package com.unisa.diem.SE.tool;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
-
+import com.unisa.diem.SE.tool.Pattern.SelectionSingleton;
 /**
  *
  * @author Francesco
@@ -12,8 +12,7 @@ public class ChangeColorFill implements Command{
     
     private ObjectProperty fillColPick;
     private Color previousColor;
-    private SelectedShape selShape = SelectedShape.getInstance();
-    private Shape shape;
+    private SelectionSingleton selSing = SelectionSingleton.getInstance();
     
     public ChangeColorFill(ObjectProperty fillColPick){
         this.fillColPick = fillColPick;
@@ -21,19 +20,22 @@ public class ChangeColorFill implements Command{
     
     @Override
     public void execute(){
-        shape = selShape.getShapeSel();
-        if(shape!=null){
-            shape.getStyleClass().remove("selectBorder");
-            previousColor = (Color) shape.getFill();
-            shape.setFill((Color) fillColPick.getValue());
-            selShape.setShapeSel(null);
-            
+        for(Shape s:selSing.getList()){
+            if(s!=null){
+                s.getStrokeDashArray().clear();
+                previousColor = (Color) s.getFill();
+                s.setFill((Color) fillColPick.getValue());
+           
+            }
         }
+        selSing.clear();
     }
     
     @Override
     public void undo(){
-        shape.setFill(previousColor);
+        for(Shape s:selSing.getList()){
+        s.setFill(previousColor);
+        }
     }
     
     
