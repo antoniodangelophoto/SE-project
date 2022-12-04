@@ -343,22 +343,9 @@ public class MainSceneController implements Initializable {
         paste.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
-                Shape Copy;
-                CopySingleton copySing=CopySingleton.getInstance();
-                for(Shape s: copySing.getList()){
-                    s.getStrokeDashArray().clear();
-                    Copy = s;
-                    Point2D tempPos= new Point2D(s.getLayoutX(),s.getLayoutY());
-                    Shape temp=Shape.union(s, Copy);
-                    
-                    temp.setFill(s.getFill());
-                    temp.setStroke(s.getStroke());
-                    temp.relocate(selPosition.getX(), selPosition.getY());
-                    System.out.println(temp.getFill());
-                    Pane.getChildren().add(temp);
-                    System.out.println(Pane.getChildren().toString());
-                }
-                copySing.clear();
+                Command pas=new Paste(selPosition,Pane);
+                commExe.execute(pas);
+                
                     
             }        
         });
@@ -383,9 +370,8 @@ public class MainSceneController implements Initializable {
         }
         
         public void del(){
-             SelectionSingleton selectedShape = SelectionSingleton.getInstance();
-             Pane.getChildren().removeAll(selectedShape.getList());
-             selectedShape.clear();
+             Command del=new Delete(Pane);
+             commExe.execute(del);
              
         }
         
