@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/giova/OneDrive/Desktop/Se_Project/SE-project/src/com/unisa/diem/SE/tool/Delete.java</file>
-            <file>file:/C:/Users/giova/OneDrive/Desktop/Se_Project/SE-project/src/com/unisa/diem/SE/MainSceneController.java</file>
-            <file>file:/C:/Users/giova/OneDrive/Desktop/Se_Project/SE-project/src/com/unisa/diem/SE/project.java</file>
-            <file>file:/C:/Users/giova/OneDrive/Desktop/Se_Project/SE-project/src/com/unisa/diem/SE/tool/Paste.java</file>
-            <file>file:/C:/Users/giova/OneDrive/Desktop/Se_Project/SE-project/src/com/unisa/diem/SE/tool/ChangeColorFill.java</file>
-            <file>file:/C:/Users/giova/OneDrive/Desktop/Se_Project/SE-project/src/com/unisa/diem/SE/tool/Pattern/CopySingleton.java</file>
+            <file>file:/Users/antonio.dangelo.photo/Documents/GitHub/SE-project/src/com/unisa/diem/SE/tool/Pattern/CopySingleton.java</file>
+            <file>file:/Users/antonio.dangelo.photo/Documents/GitHub/SE-project/src/com/unisa/diem/SE/tool/Pattern/ColorSingle.java</file>
+            <file>file:/Users/antonio.dangelo.photo/Documents/GitHub/SE-project/src/com/unisa/diem/SE/tool/Pattern/SelectionSingleton.java</file>
+            <file>file:/Users/antonio.dangelo.photo/Documents/GitHub/SE-project/src/com/unisa/diem/SE/tool/ChangeColorStroke.java</file>
+            <file>file:/Users/antonio.dangelo.photo/Documents/GitHub/SE-project/src/com/unisa/diem/SE/tool/ChangeColorFill.java</file>
+            <file>file:/Users/antonio.dangelo.photo/Documents/GitHub/SE-project/src/com/unisa/diem/SE/project.java</file>
+            <file>file:/Users/antonio.dangelo.photo/Documents/GitHub/SE-project/src/com/unisa/diem/SE/tool/SelectedShape.java</file>
+            <file>file:/Users/antonio.dangelo.photo/Documents/GitHub/SE-project/src/com/unisa/diem/SE/tool/Shapes.java</file>
+            <file>file:/Users/antonio.dangelo.photo/Documents/GitHub/SE-project/src/com/unisa/diem/SE/tool/Pattern/CommandExecutor.java</file>
+            <file>file:/Users/antonio.dangelo.photo/Documents/GitHub/SE-project/src/com/unisa/diem/SE/MainSceneController.java</file>
         </group>
     </open-files>
 </project-private>
