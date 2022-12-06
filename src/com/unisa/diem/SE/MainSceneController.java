@@ -39,6 +39,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -73,9 +74,8 @@ public class MainSceneController implements Initializable {
     @FXML
     private Pane Pane;
     @FXML
-    private ToolBar ToolBarMenu;
-    @FXML
-    private AnchorPane AnchorPane2;
+    private VBox menuSx;
+
 
 
     //private Stack primary = new Stack<ArrayList<Shapes>>();
@@ -276,7 +276,7 @@ public class MainSceneController implements Initializable {
     private void selectMove(MouseEvent event) {
         
             if(moveProp.getMoveProp()){
-                move.moveShape(shSel,ToolBarMenu.getHeight());
+                move.moveShape(shSel,menuSx.getWidth());
             
             }
         

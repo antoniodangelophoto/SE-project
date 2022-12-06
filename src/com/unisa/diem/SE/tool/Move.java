@@ -16,15 +16,15 @@ public class Move {
     private double pointY;
     private double anchorX;
     private double anchorY;
-    public void moveShape(Node node, Double height){
+    public void moveShape(Node node, Double width){
         MoveSingleton moveProp=MoveSingleton.getInstance();
         
         node.setOnMousePressed(mouseEvent ->{
             if(mouseEvent.getButton()==MouseButton.PRIMARY & moveProp.getMoveProp()){
                 anchorX = mouseEvent.getSceneX();
                 anchorY = mouseEvent.getSceneY();
-                pointX = mouseEvent.getX() + 0;
-                pointY = mouseEvent.getY() + height + 30; //111
+                pointX = mouseEvent.getX() + width;
+                pointY = mouseEvent.getY() ; //111
             }
         });
         node.setOnMouseReleased(mouseEvent ->{
