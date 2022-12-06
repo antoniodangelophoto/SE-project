@@ -34,6 +34,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
@@ -75,6 +76,10 @@ public class MainSceneController implements Initializable {
     private Pane Pane;
     @FXML
     private VBox menuSx;
+    @FXML
+    private ToolBar ToolBarMenu;
+    @FXML
+    private ScrollPane scrollPane;
 
 
 
@@ -110,6 +115,7 @@ public class MainSceneController implements Initializable {
     ColorSingle colorTemp;
     
     Shape shSel;
+    
      
    
     /**
@@ -276,7 +282,7 @@ public class MainSceneController implements Initializable {
     private void selectMove(MouseEvent event) {
         
             if(moveProp.getMoveProp()){
-                move.moveShape(shSel,menuSx.getWidth());
+                move.moveShape(shSel,menuSx.getWidth(), scrollPane);
             
             }
         

@@ -13,12 +13,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Text?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.diem.SE.MainScene1Controller">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unisa.diem.SE.MainSceneController">
    <children>
       <VBox fx:id="menuSx" prefHeight="600.0" prefWidth="104.0">
          <children>
-            <ToolBar fx:id="ToolBarMenu" orientation="VERTICAL" prefHeight="812.0" prefWidth="112.0">
+            <ToolBar fx:id="ToolBarMenu" orientation="VERTICAL" prefHeight="800.0" prefWidth="145.0">
                <items>
                   <HBox prefHeight="22.0" prefWidth="101.0" />
                   <MenuButton contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="26.0" prefWidth="101.0" text="File">
@@ -50,9 +49,9 @@
       </VBox>
       <VBox prefHeight="800.0" prefWidth="890.0">
          <children>
-            <ScrollPane hvalue="1.0" prefHeight="801.0" prefWidth="889.0" vvalue="1.0">
+            <ScrollPane fx:id="ScrollPane" hvalue="1.0" prefHeight="801.0" prefWidth="889.0" vvalue="1.0">
                <content>
-                  <Pane id="drawingPane" fx:id="Pane" onDragDetected="#setLine" onMouseClicked="#selectMove" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" prefHeight="799.0" prefWidth="887.0" />
+                  <Pane id="drawingPane" fx:id="Pane" onDragDetected="#setLine" onMouseClicked="#selectMove" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" prefHeight="798.0" prefWidth="886.0" />
                </content>
             </ScrollPane>
          </children>
