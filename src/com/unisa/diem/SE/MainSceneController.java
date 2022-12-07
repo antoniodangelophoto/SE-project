@@ -18,7 +18,6 @@ import com.unisa.diem.SE.tool.Pattern.ColorSingle;
 import com.unisa.diem.SE.tool.Pattern.CopySingleton;
 import com.unisa.diem.SE.tool.Pattern.MoveSingleton;
 import com.unisa.diem.SE.tool.Pattern.SelectionSingleton;
-import com.unisa.diem.SE.tool.Pattern.ShapeSingleton;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -115,7 +114,6 @@ public class MainSceneController implements Initializable {
     MoveSingleton moveProp=MoveSingleton.getInstance();
     SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
     CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
-    ShapeSingleton shapeSing=ShapeSingleton.getInstance();
     //ColorSingle colorTemp;
     
     Shape shSel;
