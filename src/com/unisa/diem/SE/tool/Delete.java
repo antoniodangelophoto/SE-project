@@ -30,7 +30,7 @@ public class Delete implements Command{
 
     @Override
     public void undo() {
-        for(Shape s : list)
+        for(Shape s : selSing.getList())
             pane.getChildren().addAll(list);
     }
 }
