@@ -97,13 +97,13 @@ public class Shapes {
     
     public void draw(Pane pane){
     }
-
+/*
     public void stretch(Pane pane, double x, double y) {
     }
 
     public void resize(Pane pane, double x, double y) {
     }
-
+*/
     @Override
     public String toString() {
         return type+","+startPosition.getX()+","+startPosition.getY() + "," + endPosition.getX() + "," + endPosition.getY() + ","+ color + "," + fillColor + "\n";

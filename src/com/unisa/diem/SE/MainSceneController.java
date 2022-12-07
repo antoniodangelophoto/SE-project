@@ -193,10 +193,10 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void mouseDrag(MouseEvent event) {
-        if(this.sh != null){
+        /*if(this.sh != null){
             sh.resize(Pane, event.getX(), event.getY());
             sh.stretch(Pane, event.getX(), event.getY());
-        }
+        }*/
     }
 
     
