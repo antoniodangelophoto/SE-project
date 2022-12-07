@@ -27,22 +27,24 @@ public class Paste implements Command{
     
     @Override
     public void execute() {
-       Shape Copy;
-                
-                for(Shape s: copySing.getList()){
-                    s.getStrokeDashArray().clear();
-                    Copy = s;
-                    Point2D tempPos= new Point2D(s.getLayoutX(),s.getLayoutY());
-                    temp=Shape.union(s, Copy);
-                    
-                    temp.setFill(s.getFill());
-                    temp.setStroke(s.getStroke());
-                    temp.relocate(selPosition.getX(), selPosition.getY());
-                    System.out.println(temp.getFill());
-                    pane.getChildren().add(temp);
-                    System.out.println(pane.getChildren().toString());
-                }
-                copySing.clear();
+        Shape Copy;
+        double a=0;
+            for(Shape s: copySing.getList()){
+                s.getStrokeDashArray().clear();
+                Copy = s;
+                //Point2D tempPos= new Point2D(s.getLayoutX(),s.getLayoutY());
+                temp=Shape.union(s, Copy);
+
+                temp.setFill(s.getFill());
+                temp.setStroke(s.getStroke());
+                //temp.relocate(selPosition.getX(), selPosition.getY());
+                //System.out.println(temp.getFill());
+                temp.relocate(selPosition.getX()+a, selPosition.getY()+a);
+                a=a+20; 
+                pane.getChildren().add(temp);
+                //System.out.println(pane.getChildren().toString());
+            }
+            //copySing.clear();
     }
 
     @Override
