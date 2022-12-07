@@ -6,8 +6,16 @@ package com.unisa.diem.SE.tool;
 
 import com.unisa.diem.SE.tool.Pattern.Command;
 import com.unisa.diem.SE.tool.Pattern.CopySingleton;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Scanner;
+
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.PathElement;
 import javafx.scene.shape.Shape;
 
 /**
@@ -28,21 +36,28 @@ public class Paste implements Command{
     @Override
     public void execute() {
        Shape Copy;
-                
+       double a=0;
                 for(Shape s: copySing.getList()){
                     s.getStrokeDashArray().clear();
                     Copy = s;
-                    Point2D tempPos= new Point2D(s.getLayoutX(),s.getLayoutY());
                     temp=Shape.union(s, Copy);
+                      
                     
                     temp.setFill(s.getFill());
                     temp.setStroke(s.getStroke());
-                    temp.relocate(selPosition.getX(), selPosition.getY());
-                    System.out.println(temp.getFill());
+                    temp.relocate(selPosition.getX()+a, selPosition.getY()+a);
+                    a=a+20; 
                     pane.getChildren().add(temp);
-                    System.out.println(pane.getChildren().toString());
+                    
+                    
                 }
-                copySing.clear();
+                
+               
+                
+                
+                
+                
+                
     }
 
     @Override

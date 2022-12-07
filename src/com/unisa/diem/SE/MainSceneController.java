@@ -30,6 +30,7 @@ import javafx.collections.ObservableSet;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
@@ -100,7 +101,8 @@ public class MainSceneController implements Initializable {
     ChangeColorFill changeColorFill;
     ChangeColorStroke changeColorStroke;
     //DropShadow dropShadow = new DropShadow();
-
+    
+    private boolean cutMode=false;
     private boolean rectangleMod=false;
     private boolean ellipseMod=false;
     private boolean lineMod=false;
@@ -112,7 +114,6 @@ public class MainSceneController implements Initializable {
     MoveSingleton moveProp=MoveSingleton.getInstance();
     SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
     CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
-    ColorSingle colorTemp;
     
     Shape shSel;
     
@@ -216,12 +217,12 @@ public class MainSceneController implements Initializable {
             if(!(event.getTarget().equals(Pane))){
                 
                 shSel = (Shape)event.getTarget();
-                colorTemp=ColorSingle.getInstance((Color) shSel.getStroke()); 
+                 
                 
                 if(selSing.getList().contains(shSel) & shSel!=null ){       //se la shape è già selezionata, la vado a delezionare
 
                     shSel.getStrokeDashArray().clear(); //rimuovo tratteggio
-                    shSel.setStroke(colorTemp.getColor());
+                    
                     selMenu.hide();
                     selSing.remove(shSel);
                     shSel=null;
@@ -244,16 +245,16 @@ public class MainSceneController implements Initializable {
 
                     //shSel.setStroke(Color.RED);
                     shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
-                    
+                    selPosition= new Point2D(event.getX(),event.getY());
                     selMenu.show(shSel,Side.RIGHT,0 ,0);
                 }
                 
             }else{
                 
                 System.out.println("PANE moveMODE");
-                ColorSingle colorTemp=ColorSingle.getInstance();
+                
                 for(Shape s: selSing.getList()){
-                    s.setStroke(colorTemp.getColor());
+                   
                     s.getStrokeDashArray().clear();
                 }
                 
@@ -318,6 +319,7 @@ public class MainSceneController implements Initializable {
         MenuItem copy=new MenuItem("copy");
         MenuItem delete=new MenuItem("delete");
         MenuItem paste=new MenuItem("paste");
+        //MenuItem group= new MenuItem("group");
         MenuItem changeFillColor= new MenuItem("Change Fill Color");
         MenuItem changeStrokeColor= new MenuItem("Change Stroke Color");
         MenuItem selectOther=new MenuItem("Select Other..");
@@ -326,6 +328,7 @@ public class MainSceneController implements Initializable {
             public void handle(ActionEvent e){
                 cop();
                 del();
+                cutMode=true;
             }
                     
         });
@@ -334,6 +337,7 @@ public class MainSceneController implements Initializable {
             @Override
             public void handle(ActionEvent e){
                 cop();
+                
             }
                     
         });
@@ -351,8 +355,9 @@ public class MainSceneController implements Initializable {
             public void handle(ActionEvent e){
                 Command pas=new Paste(selPosition,Pane);
                 commExe.execute(pas);
-                
-                    
+                if(cutMode)
+                    copySing.clear();
+                cutMode=false;
             }        
         });
         changeFillColor.setOnAction(new EventHandler<ActionEvent>(){
@@ -371,6 +376,7 @@ public class MainSceneController implements Initializable {
             }
         });
         
+        
         selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,changeStrokeColor,selectOther);
             
         }
@@ -384,7 +390,9 @@ public class MainSceneController implements Initializable {
         public void cop(){
              CopySingleton copySing=CopySingleton.getInstance();
              SelectionSingleton selectedShape= SelectionSingleton.getInstance();
+             copySing.clear();
              copySing.setAll(selectedShape.getList());
+             
              
              
         }

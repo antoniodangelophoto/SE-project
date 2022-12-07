@@ -55,7 +55,7 @@ public class LineSegment extends Shapes{
         line.setStartY(this.getPosition().getY());
         line.setEndX(this.getEndPosition().getX());
         line.setEndY(this.getEndPosition().getY());
-        
+        line.setStrokeWidth(1);
         line.setStroke(getColor());
         pane.getChildren().add(line);
     }

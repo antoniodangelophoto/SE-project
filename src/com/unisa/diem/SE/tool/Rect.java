@@ -88,8 +88,21 @@ public class Rect extends Shapes{
     @Override
     public void draw(Pane pane) {
         rect=new Rectangle(this.Base,this.Heigth,Color.TRANSPARENT);
-        rect.relocate(this.getPosition().getX(),this.getPosition().getY());
-        
+        if(this.getPosition().getX()-this.getEndPosition().getX()>0){
+            if(this.getPosition().getY()-this.getEndPosition().getY()>0)
+                rect.relocate(this.getPosition().getX()-this.Base,this.getPosition().getY()-this.Heigth);
+            else{
+                rect.relocate(this.getPosition().getX()-this.Base,this.getPosition().getY());
+            }
+        }    
+        else{
+            if(this.getPosition().getY()-this.getEndPosition().getY()>0){
+                rect.relocate(this.getEndPosition().getX()-this.Base,this.getEndPosition().getY());
+            }
+            else{
+                rect.relocate(this.getEndPosition().getX()-this.Base,this.getEndPosition().getY()-this.Heigth);    
+            }
+        }
         rect.setStroke(getStrokeColor());
         rect.setFill(getFillColor());
         
