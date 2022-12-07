@@ -120,10 +120,27 @@ public class Rect extends Shapes{
         this.Base=calculateBase(start, end);
         this.Heigth=calculateHeigth(start, end);
         
-        //pane.getChildren().remove(rect);
         rect.setHeight(Heigth);
         rect.setWidth(Base);
-        //draw(pane);
+        
+        if(start.getX()-end.getX()>0){
+            if(start.getY()-end.getY()>0)
+                rect.relocate(start.getX()-this.Base,start.getY()-this.Heigth);
+            else{
+                rect.relocate(start.getX()-this.Base,start.getY());
+            }
+        }    
+        else{
+            if(start.getY()-end.getY()>0){
+                rect.relocate(end.getX()-this.Base,end.getY());
+            }
+            else{
+                rect.relocate(end.getX()-this.Base,end.getY()-this.Heigth);    
+            }
+        }
+        
+        
+        
     }
 
     @Override

@@ -212,8 +212,10 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void mouseUp(MouseEvent event) {
-        end = new Point2D(event.getX(), event.getY());
-        sh.resize(Pane, start, end);
+        if(ellipseMod || rectangleMod || lineMod){
+            end = new Point2D(event.getX(), event.getY());
+            sh.resize(Pane, start, end);
+        }
     }
 
     @FXML
@@ -222,8 +224,10 @@ public class MainSceneController implements Initializable {
             sh.resize(Pane, event.getX(), event.getY());
             sh.stretch(Pane, event.getX(), event.getY());
         }*/
-        end = new Point2D(event.getX(), event.getY());
-        sh.resize(Pane, start, end);
+        if(ellipseMod || rectangleMod || lineMod){
+            end = new Point2D(event.getX(), event.getY());
+            sh.resize(Pane, start, end);
+        }
     }
 
     
@@ -313,10 +317,9 @@ public class MainSceneController implements Initializable {
     @FXML
     private void selectMove(MouseEvent event) {
         
-            if(moveProp.getMoveProp()){
-                move.moveShape(shSel,menuSx.getWidth(), scrollPane);
-            
-            }
+        if(moveProp.getMoveProp()){
+            move.moveShape(shSel,menuSx.getWidth(), scrollPane);
+        }
         
     }
     
