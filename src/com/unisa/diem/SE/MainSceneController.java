@@ -18,6 +18,7 @@ import com.unisa.diem.SE.tool.Pattern.ColorSingle;
 import com.unisa.diem.SE.tool.Pattern.CopySingleton;
 import com.unisa.diem.SE.tool.Pattern.MoveSingleton;
 import com.unisa.diem.SE.tool.Pattern.SelectionSingleton;
+import com.unisa.diem.SE.tool.Pattern.ShapeSingleton;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -94,7 +95,7 @@ public class MainSceneController implements Initializable {
     private Point2D start;
     private Point2D end;
     
-    private ArrayList<Shapes> ShapeList = new ArrayList<Shapes>();
+    //private ArrayList<Shapes> ShapeList = new ArrayList<Shapes>();
 
     Shapes shape = new Shapes();
     Move move=new Move();
@@ -114,6 +115,7 @@ public class MainSceneController implements Initializable {
     MoveSingleton moveProp=MoveSingleton.getInstance();
     SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
     CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
+    ShapeSingleton shapeSing=ShapeSingleton.getInstance();
     //ColorSingle colorTemp;
     
     Shape shSel;
@@ -164,33 +166,54 @@ public class MainSceneController implements Initializable {
         lineMod=false;
     }
 
+    /*
     public void drawFunction(){
         if(ellipseMod){
             sh=new dEllipse(start,end,StrokeColor.getValue(),FillColor.getValue());
             sh.setType("Ellipse");
             sh.draw(Pane);
-            ShapeList.add(sh);
+            //ShapeList.add(sh);
 
         }if(rectangleMod){
             sh=new Rect(start,end,StrokeColor.getValue(),FillColor.getValue());
             sh.setType("Rectangle");
             sh.draw(Pane);
-            ShapeList.add(sh);
+            //ShapeList.add(sh);
             
         }if(lineMod){
             sh=new LineSegment(start,end,StrokeColor.getValue());
             sh.setType("Line");
             sh.draw(Pane);
-            ShapeList.add(sh);
+            //ShapeList.add(sh);
+        } 
+    }
+    */
+    
+    public void drawFunction(){
+        if(ellipseMod){
+            sh=new dEllipse(start,end,StrokeColor.getValue(),FillColor.getValue());
+            sh.setType("Ellipse");
+            sh.draw(Pane);
+            //ShapeList.add(sh);
+
+        }if(rectangleMod){
+            sh=new Rect(start,end,StrokeColor.getValue(),FillColor.getValue());
+            sh.setType("Rectangle");
+            sh.draw(Pane);
+            //ShapeList.add(sh);
+            
+        }if(lineMod){
+            sh=new LineSegment(start,end,StrokeColor.getValue());
+            sh.setType("Line");
+            sh.draw(Pane);
+            //ShapeList.add(sh);
         } 
     }
 
     @FXML
     private void mouseUp(MouseEvent event) {
         end = new Point2D(event.getX(), event.getY());
-        if(event.getButton()==MouseButton.PRIMARY){
-            drawFunction();
-        }
+        sh.resize(Pane, start, end);
     }
 
     @FXML
@@ -199,6 +222,8 @@ public class MainSceneController implements Initializable {
             sh.resize(Pane, event.getX(), event.getY());
             sh.stretch(Pane, event.getX(), event.getY());
         }*/
+        end = new Point2D(event.getX(), event.getY());
+        sh.resize(Pane, start, end);
     }
 
     
@@ -212,6 +237,8 @@ public class MainSceneController implements Initializable {
                 shSel = (Shape)event.getTarget();
             }else{
                 start = new Point2D(event.getX(),event.getY());
+                end=start;
+                drawFunction();
             }
          
         } else if(event.getButton()==MouseButton.SECONDARY){
@@ -313,7 +340,7 @@ public class MainSceneController implements Initializable {
         String file = fileChooser.showSaveDialog(null).getPath();
         if(file!=null){
             FileManager fm = new FileManager();
-            fm.saveFile(file, ShapeList, Pane);
+            fm.saveFile(file, Pane);
 
         }
     }

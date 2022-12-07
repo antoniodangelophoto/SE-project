@@ -26,8 +26,8 @@ public class Rect extends Shapes{
     }
     public Rect(Point2D startPos, Point2D endPos, Color strockColor, Color fillColor) {
         super(startPos, endPos, strockColor, fillColor);
-        this.Base=calculateBase();
-        this.Heigth=calculateHeigth();
+        this.Base=calculateBase(startPos, endPos);
+        this.Heigth=calculateHeigth(startPos, endPos);
         setStrokeColor(strockColor);
         setFillColor(fillColor);
     }
@@ -50,21 +50,21 @@ public class Rect extends Shapes{
     
     
 
-    private Double calculateBase() {
-        double base=this.getPosition().getX()-this.getEndPosition().getX();
+    private Double calculateBase(Point2D start, Point2D end) {
+        double base=start.getX()-end.getX();
         if(base>0)
             return base;
         else {
-           base=this.getEndPosition().getX()-this.getPosition().getX();
+           base=end.getX()-start.getX();
            return base;
         }
     }
-    private Double calculateHeigth() {
-        double heigth=this.getPosition().getY()-this.getEndPosition().getY();
+    private Double calculateHeigth(Point2D start, Point2D end) {
+        double heigth=start.getY()-end.getY();
         if(heigth>0)
             return heigth;
         else {
-           heigth=this.getEndPosition().getY()-this.getPosition().getY();
+           heigth=end.getY()-start.getY();
            return heigth;
         }
         
@@ -89,7 +89,8 @@ public class Rect extends Shapes{
     @Override
     public void draw(Pane pane) {
         rect=new Rectangle(this.Base,this.Heigth,Color.TRANSPARENT);
-        //rect.relocate(this.getPosition().getX(),this.getPosition().getY());
+        rect.relocate(this.getPosition().getX(),this.getPosition().getY());
+        
         
         if(this.getPosition().getX()-this.getEndPosition().getX()>0){
             if(this.getPosition().getY()-this.getEndPosition().getY()>0)
@@ -112,24 +113,19 @@ public class Rect extends Shapes{
         
         pane.getChildren().add(rect);
     }
-/*
+
     @Override
-    public void resize(Pane pane, double x, double y) {
-        Point2D end = new Point2D(x,y);
-        this.setEndPosition(end);
+    public void resize(Pane pane, Point2D start, Point2D end) {
         
-        Point2D start = this.getPosition();
+        this.Base=calculateBase(start, end);
+        this.Heigth=calculateHeigth(start, end);
         
-        this.Base=abs(start.getX()-end.getX());
-        this.Heigth=abs(start.getY() - end.getY());
-        pane.getChildren().remove(rect);
-        rect=new Rectangle(this.Base,this.Heigth,Color.TRANSPARENT);
-        rect.relocate(start.getX(),start.getY());
-        rect.setStroke(getStrokeColor());
-        rect.setFill(getFillColor());
-        pane.getChildren().add(rect);
+        //pane.getChildren().remove(rect);
+        rect.setHeight(Heigth);
+        rect.setWidth(Base);
+        //draw(pane);
     }
-*/
+
     @Override
     public String toString() {
         return "Rectangle,"+this.getPosition().getX()+","+this.getPosition().getY() + "," + this.getEndPosition().getX() + "," + this.getEndPosition().getY() + ","+ this.getColor() + ","+ this.getFillColor() +"\n";

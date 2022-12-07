@@ -20,7 +20,7 @@
             <ToolBar fx:id="ToolBarMenu" orientation="VERTICAL" prefHeight="800.0" prefWidth="145.0">
                <items>
                   <HBox prefHeight="22.0" prefWidth="101.0" />
-                  <MenuButton contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" text="File">
+                  <MenuButton contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="File">
                      <items>
                         <MenuItem fx:id="Import" mnemonicParsing="false" onAction="#importFile" text="Import" />
                         <MenuItem fx:id="Export" mnemonicParsing="false" onAction="#exportFile" text="Export" />
@@ -31,15 +31,15 @@
                   <Button fx:id="ellipseMode" mnemonicParsing="false" onAction="#ellipseMode" prefHeight="26.0" prefWidth="101.0" text="Ellipse" />
                   <Button fx:id="segmentMode" mnemonicParsing="false" onAction="#lineMode" prefHeight="26.0" prefWidth="101.0" text="Line" />
                   <HBox prefHeight="115.0" prefWidth="101.0" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Stroke:" textAlignment="RIGHT" wrappingWidth="40.4375696182251" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Stroke:" wrappingWidth="40.4375696182251" />
                   <ColorPicker fx:id="StrokeColor" prefHeight="28.0" prefWidth="44.0" promptText="Stroke">
                      <value>
                         <Color />
                      </value>
                   </ColorPicker>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fill:" textAlignment="RIGHT" wrappingWidth="27.29541015625" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fill:" wrappingWidth="27.29541015625" />
                   <ColorPicker fx:id="FillColor" prefHeight="26.0" prefWidth="45.0" promptText="Fill" />
-                  <HBox prefHeight="234.0" prefWidth="101.0" />
+                  <HBox prefHeight="174.0" prefWidth="101.0" />
                   <ComboBox fx:id="customShape" onAction="#customShapeAction" prefHeight="32.0" prefWidth="101.0" promptText="CustomShapeWIP" />
                   <HBox prefHeight="21.0" prefWidth="101.0" />
                   <Button fx:id="moveMode" mnemonicParsing="false" onAction="#moveMode" prefHeight="31.0" prefWidth="100.0" text="Move" />

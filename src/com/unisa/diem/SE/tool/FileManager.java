@@ -28,7 +28,7 @@ public class FileManager {
     }
 
     
-    public void saveFile(String file, ArrayList<Shapes> ShapeList, Pane pane) throws IOException {
+    public void saveFile(String file, Pane pane) throws IOException {
         try (XMLEncoder encoder = new XMLEncoder(
         new BufferedOutputStream(
             Files.newOutputStream(Paths.get(file))))) {

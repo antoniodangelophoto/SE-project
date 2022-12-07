@@ -110,6 +110,11 @@ public class dEllipse extends Shapes {
         pane.getChildren().add(ellipse);
     }
     
+    
+    @Override
+    public void resize(Pane pane,Point2D start, Point2D end) {
+    }
+    
     /*
     public Shape draw(Pane pane, Point2D startPos, Point2D endPos, Color strokeColor, Color fillColor){
         ellipse=new Ellipse();
