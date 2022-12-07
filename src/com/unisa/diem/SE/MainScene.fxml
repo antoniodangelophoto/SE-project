@@ -20,7 +20,7 @@
             <ToolBar fx:id="ToolBarMenu" orientation="VERTICAL" prefHeight="800.0" prefWidth="145.0">
                <items>
                   <HBox prefHeight="22.0" prefWidth="101.0" />
-                  <MenuButton contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="26.0" prefWidth="101.0" text="File">
+                  <MenuButton contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" text="File">
                      <items>
                         <MenuItem fx:id="Import" mnemonicParsing="false" onAction="#importFile" text="Import" />
                         <MenuItem fx:id="Export" mnemonicParsing="false" onAction="#exportFile" text="Export" />
@@ -51,7 +51,7 @@
          <children>
             <ScrollPane fx:id="ScrollPane" hvalue="1.0" prefHeight="801.0" prefWidth="889.0" vvalue="1.0">
                <content>
-                  <Pane id="drawingPane" fx:id="Pane" onDragDetected="#setLine" onMouseClicked="#selectMove" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" prefHeight="798.0" prefWidth="886.0" />
+                  <Pane id="drawingPane" fx:id="Pane" onMouseClicked="#selectMove" onMouseDragged="#mouseDrag" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" prefHeight="798.0" prefWidth="886.0" />
                </content>
             </ScrollPane>
          </children>

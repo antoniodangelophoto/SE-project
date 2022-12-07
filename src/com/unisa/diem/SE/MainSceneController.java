@@ -116,7 +116,7 @@ public class MainSceneController implements Initializable {
     CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
     
     Shape shSel;
-    
+    Shapes sh; 
      
    
     /**
@@ -164,7 +164,6 @@ public class MainSceneController implements Initializable {
     }
 
     public void drawFunction(){
-        Shapes sh;
         if(ellipseMod){
             sh=new dEllipse(start,end,StrokeColor.getValue(),FillColor.getValue());
             sh.setType("Ellipse");
@@ -194,9 +193,13 @@ public class MainSceneController implements Initializable {
     }
 
     @FXML
-    private void setLine(MouseEvent event) {
-        shape = (Shapes)event.getTarget();
+    private void mouseDrag(MouseEvent event) {
+        if(this.sh != null){
+            sh.resize(Pane, event.getX(), event.getY());
+            sh.stretch(Pane, event.getX(), event.getY());
+        }
     }
+
     
 
     @FXML
