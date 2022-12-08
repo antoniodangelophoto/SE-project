@@ -38,7 +38,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -118,6 +120,7 @@ public class MainSceneController implements Initializable {
     
     Shape shSel;
     Shapes sh; 
+    
      
    
     /**
@@ -210,7 +213,7 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void mouseUp(MouseEvent event) {
-        if(ellipseMod || rectangleMod || lineMod){
+        if((ellipseMod || rectangleMod || lineMod)&& event.getButton()==MouseButton.PRIMARY){
             end = new Point2D(event.getX(), event.getY());
             sh.resize(Pane, start, end);
         }
@@ -222,11 +225,14 @@ public class MainSceneController implements Initializable {
             sh.resize(Pane, event.getX(), event.getY());
             sh.stretch(Pane, event.getX(), event.getY());
         }*/
-        if(ellipseMod || rectangleMod || lineMod){
+        if((ellipseMod || rectangleMod || lineMod )&& event.getButton()==MouseButton.PRIMARY){
             end = new Point2D(event.getX(), event.getY());
             sh.resize(Pane, start, end);
         }
+        
     }
+    
+  
 
     
 
@@ -351,7 +357,7 @@ public class MainSceneController implements Initializable {
         MenuItem copy=new MenuItem("copy");
         MenuItem delete=new MenuItem("delete");
         MenuItem paste=new MenuItem("paste");
-        //MenuItem group= new MenuItem("group");
+        MenuItem group= new MenuItem("group");
         MenuItem changeFillColor= new MenuItem("Change Fill Color");
         MenuItem changeStrokeColor= new MenuItem("Change Stroke Color");
         MenuItem selectOther=new MenuItem("Select Other..");
@@ -380,7 +386,39 @@ public class MainSceneController implements Initializable {
             }
                     
         });
-        
+        group.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                  Shape temp=null;
+                Shape Copy;
+                Point2D tempPos=new Point2D(0,0);
+                int counter=0;
+                for(Shape s: selSing.getList()){
+                   
+                    s.getStrokeDashArray().clear();
+                    Copy=s;
+                    
+                    if(temp==null){
+                        System.out.println(s.getLayoutX()+"ue"+s.getLayoutY());
+                        temp=Shape.union(Copy, s);
+                        temp.setLayoutX(s.getLayoutX());
+                        temp.setLayoutY(s.getLayoutY());
+                        tempPos=new Point2D(s.getLayoutX(),s.getLayoutY());
+                        System.out.println(temp.getLayoutX()+"ue"+temp.getLayoutY());
+                    }    
+                    else{
+                        temp=Shape.union(s, temp);
+                        
+                    }
+                    temp.setFill(s.getFill());
+                    temp.setStroke(s.getStroke());
+                    
+                    Pane.getChildren().remove(s);
+                }
+                selSing.clear();
+                Pane.getChildren().add(temp);
+            }        
+        });
         paste.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
@@ -408,7 +446,7 @@ public class MainSceneController implements Initializable {
             }
         });
         
-        selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,changeStrokeColor,selectOther);
+        selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,group,changeStrokeColor,selectOther);
             
         }
         
@@ -442,6 +480,13 @@ public class MainSceneController implements Initializable {
     @FXML
     private void customShapeAction(ActionEvent event) {
     }
+
+    @FXML
+    private void endDrag(DragEvent event) {
+    }
+
+
+    
 
 
 }
