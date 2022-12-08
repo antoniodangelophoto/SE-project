@@ -35,7 +35,8 @@
                   <Button fx:id="rectangleMode" mnemonicParsing="false" onAction="#rectangleMode" prefHeight="26.0" prefWidth="101.0" text="Rectangle" />
                   <Button fx:id="ellipseMode" mnemonicParsing="false" onAction="#ellipseMode" prefHeight="26.0" prefWidth="101.0" text="Ellipse" />
                   <Button fx:id="segmentMode" mnemonicParsing="false" onAction="#lineMode" prefHeight="26.0" prefWidth="101.0" text="Line" />
-                  <HBox prefHeight="115.0" prefWidth="101.0" />
+                  <Button fx:id="PolyMode" mnemonicParsing="false" onAction="#SetPolymode" prefHeight="31.0" prefWidth="100.0" text="Polygon" />
+                  <HBox prefHeight="100.0" prefWidth="101.0" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Stroke:" wrappingWidth="40.4375696182251" />
                   <ColorPicker fx:id="StrokeColor" prefHeight="28.0" prefWidth="44.0" promptText="Stroke">
                      <value>

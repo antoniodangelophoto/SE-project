@@ -14,39 +14,23 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.geometry.Point2D;
 import com.unisa.diem.SE.tool.*;
-import com.unisa.diem.SE.tool.Pattern.ColorSingle;
 import com.unisa.diem.SE.tool.Pattern.CopySingleton;
 import com.unisa.diem.SE.tool.Pattern.MoveSingleton;
 import com.unisa.diem.SE.tool.Pattern.SelectionSingleton;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.Stack;
-import javafx.beans.property.ObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
-import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToolBar;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -81,7 +65,6 @@ public class MainSceneController implements Initializable {
     private VBox menuSx;
     @FXML
     private ToolBar ToolBarMenu;
-    @FXML
     private ScrollPane scrollPane;
 
 
@@ -108,10 +91,12 @@ public class MainSceneController implements Initializable {
     private boolean rectangleMod=false;
     private boolean ellipseMod=false;
     private boolean lineMod=false;
-    
+    private boolean polygonMode;
     //PATTERN COMMAND
     CommandExecutor commExe= new CommandExecutor();
     
+    //Polygon Points
+    ArrayList<Circle> points= new ArrayList<Circle>();
     // DEFINIZIONE PATTERN SINGLETON
     MoveSingleton moveProp=MoveSingleton.getInstance();
     SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
@@ -120,6 +105,10 @@ public class MainSceneController implements Initializable {
     
     Shape shSel;
     Shapes sh; 
+    @FXML
+    private Button PolyMode;
+    @FXML
+    private ScrollPane ScrollPane;
     
      
    
@@ -141,6 +130,7 @@ public class MainSceneController implements Initializable {
         rectangleMod=true;
         lineMod=false;
         moveProp.moveSetFalse();
+        polygonMode=false;
     }
 
     @FXML
@@ -149,6 +139,7 @@ public class MainSceneController implements Initializable {
         rectangleMod=false;
         lineMod=false;
         moveProp.moveSetFalse();
+        polygonMode=false;
     }
 
     @FXML
@@ -157,6 +148,7 @@ public class MainSceneController implements Initializable {
         rectangleMod=false;
         lineMod=true;
         moveProp.moveSetFalse();
+        polygonMode=false;
     }
 
     @FXML
@@ -165,8 +157,23 @@ public class MainSceneController implements Initializable {
         ellipseMod=false;
         rectangleMod=false;
         lineMod=false;
+        polygonMode=false;
     }
-
+    @FXML
+    private void SetPolymode(ActionEvent event) {
+        ellipseMod=false;
+        rectangleMod=false;
+        lineMod=false;
+        moveProp.moveSetFalse();
+        polygonMode=true;
+        if(points.size()>1)
+            drawFunction();
+        else {
+            
+            Pane.getChildren().removeAll(points);
+            points.clear();
+        }
+    }
     /*
     public void drawFunction(){
         if(ellipseMod){
@@ -208,12 +215,17 @@ public class MainSceneController implements Initializable {
             sh.setType("Line");
             sh.draw(Pane);
             //ShapeList.add(sh);
-        } 
+        } if(polygonMode){
+            sh=new Polygons(Point2D.ZERO, Point2D.ZERO, StrokeColor.getValue(),FillColor.getValue(),points);
+            sh.setType("Polygon");
+            sh.draw(Pane);
+            points.clear();
+        }
     }
 
     @FXML
     private void mouseUp(MouseEvent event) {
-        if((ellipseMod || rectangleMod || lineMod)&& event.getButton()==MouseButton.PRIMARY){
+        if((ellipseMod || rectangleMod || lineMod )&& event.getButton()==MouseButton.PRIMARY){
             end = new Point2D(event.getX(), event.getY());
             sh.resize(start, end);
         }
@@ -243,14 +255,28 @@ public class MainSceneController implements Initializable {
             
             if(moveProp.getMoveProp()){
                 shSel = (Shape)event.getTarget();
+                Pane.getChildren().removeAll(points);
+                points.clear();
+            }else if(polygonMode){
+                Circle point= new Circle();
+                point.setFill(Color.RED);
+                point.setCenterX(event.getX());
+                point.setCenterY(event.getY());
+                point.setRadius(10);
+                
+                points.add(point);
+                Pane.getChildren().add(point);
             }else{
                 start = new Point2D(event.getX(),event.getY());
                 end=start;
                 drawFunction();
+                Pane.getChildren().removeAll(points);
+                points.clear();
             }
          
         } else if(event.getButton()==MouseButton.SECONDARY){
-            
+            Pane.getChildren().removeAll(points);
+            points.clear();
             //Shape shSel;
             
             if(!(event.getTarget().equals(Pane))){
@@ -329,6 +355,8 @@ public class MainSceneController implements Initializable {
     
     @FXML
     public void importFile(ActionEvent event) throws IOException{
+        Pane.getChildren().removeAll(points);
+        points.clear();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open resource file");
         fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.xml"));
@@ -341,6 +369,8 @@ public class MainSceneController implements Initializable {
     }
     @FXML
     public void exportFile(ActionEvent event) throws IOException{
+        Pane.getChildren().removeAll(points);
+        points.clear();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open resource file");
         fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.xml"));
@@ -485,6 +515,7 @@ public class MainSceneController implements Initializable {
     private void endDrag(DragEvent event) {
     }
 
+   
 
     
 
