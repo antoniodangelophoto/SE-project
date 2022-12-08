@@ -215,7 +215,7 @@ public class MainSceneController implements Initializable {
     private void mouseUp(MouseEvent event) {
         if((ellipseMod || rectangleMod || lineMod)&& event.getButton()==MouseButton.PRIMARY){
             end = new Point2D(event.getX(), event.getY());
-            sh.resize(Pane, start, end);
+            sh.resize(start, end);
         }
     }
 
@@ -227,7 +227,7 @@ public class MainSceneController implements Initializable {
         }*/
         if((ellipseMod || rectangleMod || lineMod )&& event.getButton()==MouseButton.PRIMARY){
             end = new Point2D(event.getX(), event.getY());
-            sh.resize(Pane, start, end);
+            sh.resize(start, end);
         }
         
     }

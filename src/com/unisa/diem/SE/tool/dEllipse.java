@@ -112,8 +112,11 @@ public class dEllipse extends Shapes {
     
     
     @Override
-    public void resize(Pane pane,Point2D start, Point2D end) {
-        
+    public void resize(Point2D start, Point2D end) {
+        this.setxRadius(Math.abs(start.getX() - end.getX()));
+        this.setyRadius(Math.abs(start.getY() - end.getY()));
+        ellipse.setRadiusX(this.getxRadius());
+        ellipse.setRadiusY(this.getyRadius());
     }
     
     /*

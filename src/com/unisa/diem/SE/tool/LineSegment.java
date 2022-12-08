@@ -16,7 +16,8 @@ import javafx.scene.shape.Line;
 public class LineSegment extends Shapes{
     
     private Color color;
-
+    private Line line;
+    
     public Color getColor() {
         return this.color;
     }
@@ -50,7 +51,7 @@ public class LineSegment extends Shapes{
     */
     @Override
     public void draw(Pane pane) {
-        Line line = new Line();
+        line = new Line();
         line.setStartX(this.getPosition().getX());
         line.setStartY(this.getPosition().getY());
         line.setEndX(this.getEndPosition().getX());
@@ -66,6 +67,13 @@ public class LineSegment extends Shapes{
         return "Line,"+this.getPosition().getX()+","+this.getPosition().getY() + "," + this.getEndPosition().getX() + "," + this.getEndPosition().getY() + ","+ color + "\n";
     }
 
+    @Override
+    public void resize(Point2D start, Point2D end) {
+        line.setStartX(start.getX());
+        line.setStartY(start.getY());
+        line.setEndX(end.getX());
+        line.setEndY(end.getY());
+    }
     
 }
 

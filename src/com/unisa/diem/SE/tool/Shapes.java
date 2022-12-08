@@ -101,7 +101,7 @@ public class Shapes {
     public void stretch(Pane pane, double x, double y) {
     }
 */
-    public void resize(Pane pane,Point2D start, Point2D end) {
+    public void resize(Point2D start, Point2D end) {
     }
 
     @Override

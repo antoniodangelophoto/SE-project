@@ -115,7 +115,7 @@ public class Rect extends Shapes{
     }
 
     @Override
-    public void resize(Pane pane, Point2D start, Point2D end) {
+    public void resize(Point2D start, Point2D end) {
         
         this.Base=calculateBase(start, end);
         this.Heigth=calculateHeigth(start, end);
