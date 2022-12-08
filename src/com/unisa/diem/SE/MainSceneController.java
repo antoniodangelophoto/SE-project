@@ -32,6 +32,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 /**
@@ -109,8 +110,11 @@ public class MainSceneController implements Initializable {
     private Button PolyMode;
     @FXML
     private ScrollPane ScrollPane;
-    
-     
+    @FXML
+    private Text zoomOutInButton;
+    @FXML
+    private Text zoomInInButton;
+    private double resizeWindow=1;
    
     /**
      * Initializes the controller class.
@@ -525,8 +529,38 @@ public class MainSceneController implements Initializable {
     private void endDrag(DragEvent event) {
     }
 
-   
+    @FXML
+    private void zoomInOnAction(ActionEvent event) {
+        if(this.resizeWindow<1.4){
+            this.resizeWindow+=0.1;
+        }
+        this.Pane.setScaleX(this.resizeWindow);
+        this.Pane.setScaleY(this.resizeWindow);   
+    }
+    @FXML
+    private void zoomInOnMousePressed(MouseEvent event) {
 
+    }
+    @FXML
+    private void zoomInOnMouseReleased(ActionEvent event) {
+
+    }
+    @FXML
+    private void zoomOutOnAction(ActionEvent event) {
+        if(this.resizeWindow>0.6){
+            this.resizeWindow-=0.1;
+        }
+        this.Pane.setScaleX(this.resizeWindow);
+        this.Pane.setScaleY(this.resizeWindow);
+    }   
+    @FXML
+    private void zoomOutOnMousePressed(MouseEvent event) {
+
+    }
+    @FXML
+    private void zoomOutOnMouseReleased(ActionEvent event) {
+
+    }
     
 
 
