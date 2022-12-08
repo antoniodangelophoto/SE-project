@@ -390,6 +390,7 @@ public class MainSceneController implements Initializable {
         MenuItem group= new MenuItem("group");
         MenuItem changeFillColor= new MenuItem("Change Fill Color");
         MenuItem changeStrokeColor= new MenuItem("Change Stroke Color");
+        MenuItem undo = new MenuItem("Undo");
         MenuItem selectOther=new MenuItem("Select Other..");
         
         cut.setOnAction(new EventHandler<ActionEvent>(){
@@ -476,7 +477,16 @@ public class MainSceneController implements Initializable {
             }
         });
         
-        selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,group,changeStrokeColor,selectOther);
+        undo.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                commExe.undoLast();
+            }
+            
+        });
+        
+        
+        selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,group,changeStrokeColor,undo,selectOther);
             
         }
         
