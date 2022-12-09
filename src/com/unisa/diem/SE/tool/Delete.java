@@ -24,13 +24,15 @@ public class Delete implements Command{
     @Override
     public void execute(){
         pane.getChildren().removeAll(selSing.getList());
-        list.addAll(list);
+        list.addAll(selSing.getList());
         selSing.clear();
     }
 
     @Override
     public void undo() {
-        for(Shape s : list)
-            pane.getChildren().addAll(list);
+        for(Shape s : list){
+            s.getStrokeDashArray().clear();
+            pane.getChildren().addAll(s);
+            }
     }
 }

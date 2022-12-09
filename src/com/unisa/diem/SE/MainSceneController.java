@@ -441,34 +441,8 @@ public class MainSceneController implements Initializable {
         group.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
-                  Shape temp=null;
-                Shape Copy;
-                Point2D tempPos=new Point2D(0,0);
-                int counter=0;
-                for(Shape s: selSing.getList()){
-                   
-                    s.getStrokeDashArray().clear();
-                    Copy=s;
-                    
-                    if(temp==null){
-                        System.out.println(s.getLayoutX()+"ue"+s.getLayoutY());
-                        temp=Shape.union(Copy, s);
-                        temp.setLayoutX(s.getLayoutX());
-                        temp.setLayoutY(s.getLayoutY());
-                        tempPos=new Point2D(s.getLayoutX(),s.getLayoutY());
-                        System.out.println(temp.getLayoutX()+"ue"+temp.getLayoutY());
-                    }    
-                    else{
-                        temp=Shape.union(s, temp);
-                        
-                    }
-                    temp.setFill(s.getFill());
-                    temp.setStroke(s.getStroke());
-                    
-                    Pane.getChildren().remove(s);
-                }
-                selSing.clear();
-                Pane.getChildren().add(temp);
+                  Command group= new pattGroup(Pane);
+                  commExe.execute(group);
             }        
         });
         paste.setOnAction(new EventHandler<ActionEvent>(){
@@ -498,16 +472,10 @@ public class MainSceneController implements Initializable {
             }
         });
         
-        undo.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent e){
-                commExe.undoLast();
-            }
-            
-        });
         
         
-        selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,group,changeStrokeColor,undo,selectOther);
+        
+        selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,changeStrokeColor,group,selectOther);
             
         }
         

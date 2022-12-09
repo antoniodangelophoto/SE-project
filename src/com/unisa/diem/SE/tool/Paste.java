@@ -6,6 +6,7 @@ package com.unisa.diem.SE.tool;
 
 import com.unisa.diem.SE.tool.Pattern.Command;
 import com.unisa.diem.SE.tool.Pattern.CopySingleton;
+import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
@@ -19,6 +20,7 @@ public class Paste implements Command{
     private Point2D selPosition;
     private Pane pane;
     private Shape temp;
+    private ArrayList<Shape> pasteList= new ArrayList();
 
     public Paste(Point2D selpos, Pane p) {
         this.selPosition = selpos;
@@ -41,6 +43,7 @@ public class Paste implements Command{
                 //System.out.println(temp.getFill());
                 temp.relocate(selPosition.getX()+a, selPosition.getY()+a);
                 a=a+20; 
+                pasteList.add(temp);
                 pane.getChildren().add(temp);
                 //System.out.println(pane.getChildren().toString());
             }
@@ -49,7 +52,9 @@ public class Paste implements Command{
 
     @Override
     public void undo() {
-        pane.getChildren().remove(temp);
+         for(Shape s:pasteList)
+            pane.getChildren().remove(temp);
+        
     }
     
 }
