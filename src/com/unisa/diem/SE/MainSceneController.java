@@ -536,14 +536,7 @@ public class MainSceneController implements Initializable {
         this.Pane.setScaleX(this.resizeWindow);
         this.Pane.setScaleY(this.resizeWindow);   
     }
-    @FXML
-    private void zoomInOnMousePressed(MouseEvent event) {
 
-    }
-    @FXML
-    private void zoomInOnMouseReleased(ActionEvent event) {
-
-    }
     @FXML
     private void zoomOutOnAction(ActionEvent event) {
         if(this.resizeWindow>0.6){
@@ -552,14 +545,6 @@ public class MainSceneController implements Initializable {
         this.Pane.setScaleX(this.resizeWindow);
         this.Pane.setScaleY(this.resizeWindow);
     }   
-    @FXML
-    private void zoomOutOnMousePressed(MouseEvent event) {
-
-    }
-    @FXML
-    private void zoomOutOnMouseReleased(ActionEvent event) {
-
-    }
     
     @FXML
     private void BringToFrontOnAction(ActionEvent event) {

@@ -44,7 +44,7 @@
                               </Label>
                               <HBox prefHeight="40.0" prefWidth="102.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#zoomInOnAction" onMousePressed="#zoomInOnMousePressed" onMouseReleased="#zoomInOnMouseReleased" prefHeight="27.0" prefWidth="41.0">
+                                    <Button mnemonicParsing="false" onAction="#zoomInOnAction" prefHeight="27.0" prefWidth="41.0">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
@@ -55,7 +55,7 @@
                                           <Insets right="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#zoomOutOnAction" onMousePressed="#zoomOutOnMousePressed" onMouseReleased="#zoomOutOnMouseReleased" prefHeight="27.0" prefWidth="41.0">
+                                    <Button mnemonicParsing="false" onAction="#zoomOutOnAction" prefHeight="27.0" prefWidth="41.0">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
@@ -139,7 +139,7 @@
       </VBox>
       <VBox prefHeight="800.0" prefWidth="890.0">
          <children>
-            <ScrollPane fx:id="ScrollPane" hvalue="1.0" prefHeight="801.0" prefWidth="889.0" vvalue="1.0">
+            <ScrollPane fx:id="ScrollPane" hvalue="1.0" pannable="true" prefHeight="801.0" prefWidth="889.0" vvalue="1.0">
                <content>
                   <Pane id="drawingPane" fx:id="Pane" onDragExited="#endDrag" onMouseClicked="#selectMove" onMouseDragged="#mouseDrag" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" prefHeight="798.0" prefWidth="886.0" />
                </content>
