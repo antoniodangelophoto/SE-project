@@ -15,6 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.geometry.Point2D;
 import com.unisa.diem.SE.tool.*;
 import com.unisa.diem.SE.tool.Pattern.CopySingleton;
+import com.unisa.diem.SE.tool.Pattern.GoBackgroundCommand;
+import com.unisa.diem.SE.tool.Pattern.GoFrontCommand;
 import com.unisa.diem.SE.tool.Pattern.MoveSingleton;
 import com.unisa.diem.SE.tool.Pattern.SelectionSingleton;
 import java.io.IOException;
@@ -35,6 +37,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Screen;
 /**
  * FXML Controller class
  *
@@ -67,9 +70,6 @@ public class MainSceneController implements Initializable {
     @FXML
     private ToolBar ToolBarMenu;
     private ScrollPane scrollPane;
-
-
-
     //private Stack primary = new Stack<ArrayList<Shapes>>();
     //private Stack secondary = new Stack<ArrayList<Shapes>>();
     
@@ -124,7 +124,6 @@ public class MainSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         contextMenuInitialize();
-        
     }    
 
 
@@ -562,6 +561,18 @@ public class MainSceneController implements Initializable {
 
     }
     
+    @FXML
+    private void BringToFrontOnAction(ActionEvent event) {
+        if (shSel != null) {
+            commExe.execute(new GoFrontCommand(Pane, shSel));
+        }
+    }
 
+    @FXML
+    private void BringToBackOnAction(ActionEvent event) {
+        if (shSel != null) {
+            commExe.execute(new GoBackgroundCommand(Pane, shSel));
+        }
+    }
 
 }
