@@ -15,6 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.geometry.Point2D;
 import com.unisa.diem.SE.tool.*;
 import com.unisa.diem.SE.tool.Pattern.CopySingleton;
+import com.unisa.diem.SE.tool.Pattern.GoBackgroundCommand;
+import com.unisa.diem.SE.tool.Pattern.GoFrontCommand;
 import com.unisa.diem.SE.tool.Pattern.MoveSingleton;
 import com.unisa.diem.SE.tool.Pattern.SelectionSingleton;
 import java.io.IOException;
@@ -553,10 +555,6 @@ public class MainSceneController implements Initializable {
         this.Pane.setScaleY(this.resizeWindow);   
     }
     @FXML
-    private void zoomInOnMousePressed(MouseEvent event) {
-
-    }
-    @FXML
     private void zoomOutOnAction(ActionEvent event) {
         if(this.resizeWindow>0.6){
             this.resizeWindow-=0.1;
@@ -564,21 +562,20 @@ public class MainSceneController implements Initializable {
         this.Pane.setScaleX(this.resizeWindow);
         this.Pane.setScaleY(this.resizeWindow);
     }   
-    @FXML
-    private void zoomOutOnMousePressed(MouseEvent event) {
 
-    }
-    @FXML
-    private void zoomInOnMouseReleased(MouseEvent event) {
-
-    }
 
     @FXML
-    private void zoomOutOnMouseReleased(MouseEvent event) {
+    private void BringToFrontOnAction(ActionEvent event) {
+        if (shSel != null) {
+            commExe.execute(new GoFrontCommand(Pane, shSel));
+        }
     }
 
-    
-    
-
+    @FXML
+    private void BringToBackOnAction(ActionEvent event) {
+        if (shSel != null) {
+            commExe.execute(new GoBackgroundCommand(Pane, shSel));
+        }
+    }
 
 }
