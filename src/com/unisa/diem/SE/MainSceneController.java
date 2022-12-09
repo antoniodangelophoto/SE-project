@@ -27,6 +27,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -115,6 +116,10 @@ public class MainSceneController implements Initializable {
     @FXML
     private Text zoomInInButton;
     private double resizeWindow=1;
+    @FXML
+    private Button UndoBtn;
+    @FXML
+    private GridPane Grid;
    
     /**
      * Initializes the controller class.
@@ -177,6 +182,16 @@ public class MainSceneController implements Initializable {
             Pane.getChildren().removeAll(points);
             points.clear();
         }
+    }
+    
+    @FXML
+    private void UndoMode(ActionEvent event) {
+        ellipseMod=false;
+        rectangleMod=false;
+        lineMod=false;
+        moveProp.moveSetFalse();
+        polygonMode=false;
+        commExe.undoLast();
     }
     /*
     public void drawFunction(){
@@ -542,10 +557,6 @@ public class MainSceneController implements Initializable {
 
     }
     @FXML
-    private void zoomInOnMouseReleased(ActionEvent event) {
-
-    }
-    @FXML
     private void zoomOutOnAction(ActionEvent event) {
         if(this.resizeWindow>0.6){
             this.resizeWindow-=0.1;
@@ -558,9 +569,15 @@ public class MainSceneController implements Initializable {
 
     }
     @FXML
-    private void zoomOutOnMouseReleased(ActionEvent event) {
+    private void zoomInOnMouseReleased(MouseEvent event) {
 
     }
+
+    @FXML
+    private void zoomOutOnMouseReleased(MouseEvent event) {
+    }
+
+    
     
 
 
