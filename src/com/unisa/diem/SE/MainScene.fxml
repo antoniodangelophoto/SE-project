@@ -129,7 +129,7 @@
       </VBox>
       <VBox prefHeight="800.0" prefWidth="814.0">
          <children>
-            <ScrollPane fx:id="ScrollPane" hvalue="1.0" prefHeight="791.0" prefWidth="837.0" vvalue="1.0">
+            <ScrollPane fx:id="scrollPane" hvalue="1.0" prefHeight="791.0" prefWidth="837.0" vvalue="1.0">
                <content>
                   <Pane id="drawingPane" fx:id="Pane" onDragExited="#endDrag" onMouseClicked="#selectMove" onMouseDragged="#mouseDrag" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" prefHeight="791.0" prefWidth="774.0">
                      <children>

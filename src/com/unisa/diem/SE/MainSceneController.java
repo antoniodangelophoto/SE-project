@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
+import javafx.scene.Group;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ScrollPane;
@@ -69,8 +70,20 @@ public class MainSceneController implements Initializable {
     private VBox menuSx;
     @FXML
     private ToolBar ToolBarMenu;
+    @FXML
+    private Button PolyMode;
+    @FXML
     private ScrollPane scrollPane;
-
+    @FXML
+    private Text zoomOutInButton;
+    @FXML
+    private Text zoomInInButton;
+    
+    private double resizeWindow=1;
+    @FXML
+    private Button UndoBtn;
+    @FXML
+    private GridPane Grid;
 
 
     //private Stack primary = new Stack<ArrayList<Shapes>>();
@@ -109,19 +122,8 @@ public class MainSceneController implements Initializable {
     
     Shape shSel;
     Shapes sh; 
-    @FXML
-    private Button PolyMode;
-    @FXML
-    private ScrollPane ScrollPane;
-    @FXML
-    private Text zoomOutInButton;
-    @FXML
-    private Text zoomInInButton;
-    private double resizeWindow=1;
-    @FXML
-    private Button UndoBtn;
-    @FXML
-    private GridPane Grid;
+    
+    
    
     /**
      * Initializes the controller class.
@@ -132,6 +134,14 @@ public class MainSceneController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         contextMenuInitialize();
         
+        //listener for scrollPane zoomable and pannable
+        Group paneGroup = new Group(Pane);
+        scrollPane.setContent(paneGroup);
+        scrollPane.fitToWidthProperty().set(true);
+        scrollPane.fitToHeightProperty().set(true);
+        scrollPane.viewportBoundsProperty().addListener((observable, oldValue, newValue)->{
+            Pane.setPrefSize(newValue.getWidth(), newValue.getHeight());
+        });
     }    
 
 
@@ -516,6 +526,9 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void zoomInOnAction(ActionEvent event) {
+        
+
+    
         if(this.resizeWindow<1.4){
             this.resizeWindow+=0.1;
         }
