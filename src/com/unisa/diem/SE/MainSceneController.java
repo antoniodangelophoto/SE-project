@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;   
 import javafx.scene.input.MouseEvent;
 import javafx.geometry.Point2D;
@@ -34,12 +33,12 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 /**
@@ -57,8 +56,6 @@ public class MainSceneController implements Initializable {
     private Button segmentMode;
     @FXML
     private Button moveMode;
-    @FXML
-    private ComboBox<?> customShape;
     @FXML
     private ColorPicker StrokeColor;
     @FXML
@@ -87,7 +84,22 @@ public class MainSceneController implements Initializable {
     private CheckBox gridBtn;
     @FXML
     private Slider gridSlider;
-    
+    @FXML
+    private Button resizeBtn;
+    @FXML
+    private HBox resizeHBox;
+    @FXML
+    private Button lessWidthButton;
+    @FXML
+    private Button moreWidthButton;
+    @FXML
+    private CheckBox blockAspectRatio;
+    @FXML
+    private HBox HeightHBox;
+    @FXML
+    private Button lessHeightButton;
+    @FXML
+    private Button moreHeightButton;
 
     private ContextMenu selMenu;
        
@@ -99,7 +111,6 @@ public class MainSceneController implements Initializable {
     Move move=new Move();
     ChangeColorFill changeColorFill;
     ChangeColorStroke changeColorStroke;
-    //DropShadow dropShadow = new DropShadow();
 
     //Mode's Flag
     private boolean cutMode=false;
@@ -107,6 +118,9 @@ public class MainSceneController implements Initializable {
     private boolean ellipseMod=false;
     private boolean lineMod=false;
     private boolean polygonMode;
+    private boolean resize=false;
+    
+    private boolean aspectRatio=false;
     
     //PATTERN COMMAND
     CommandExecutor commExe= new CommandExecutor();
@@ -121,6 +135,7 @@ public class MainSceneController implements Initializable {
     
     Shape shSel;
     Shapes sh; 
+ 
     
     /**
      * Initializes the controller class.
@@ -139,6 +154,11 @@ public class MainSceneController implements Initializable {
         scrollPane.viewportBoundsProperty().addListener((observable, oldValue, newValue)->{
             Pane.setPrefSize(newValue.getWidth(), newValue.getHeight());
         });
+        
+        resizeHBox.setDisable(true);
+        HeightHBox.setDisable(true);
+        gridSlider.setDisable(true);
+        
     }    
 
     @FXML
@@ -148,6 +168,8 @@ public class MainSceneController implements Initializable {
         lineMod=false;
         moveProp.moveSetFalse();
         polygonMode=false;
+        resize=false;
+        resizeHBox.setDisable(true);
     }
 
     @FXML
@@ -157,6 +179,8 @@ public class MainSceneController implements Initializable {
         lineMod=false;
         moveProp.moveSetFalse();
         polygonMode=false;
+        resize=false;
+        resizeHBox.setDisable(true);
     }
 
     @FXML
@@ -166,6 +190,8 @@ public class MainSceneController implements Initializable {
         lineMod=true;
         moveProp.moveSetFalse();
         polygonMode=false;
+        resize=false;
+        resizeHBox.setDisable(true);
     }
 
     @FXML
@@ -175,6 +201,8 @@ public class MainSceneController implements Initializable {
         rectangleMod=false;
         lineMod=false;
         polygonMode=false;
+        resize=false;
+        resizeHBox.setDisable(true);
     }
     @FXML
     private void SetPolymode(ActionEvent event) {
@@ -183,6 +211,8 @@ public class MainSceneController implements Initializable {
         lineMod=false;
         moveProp.moveSetFalse();
         polygonMode=true;
+        resize=false;
+        resizeHBox.setDisable(true);
         if(points.size()>1)
             drawFunction();
         else {
@@ -199,7 +229,20 @@ public class MainSceneController implements Initializable {
         lineMod=false;
         moveProp.moveSetFalse();
         polygonMode=false;
+        resize=false;
         commExe.undoLast();
+        resizeHBox.setDisable(true);
+    }
+    
+    @FXML
+    private void resizeButton(ActionEvent event) {
+        resize=true;
+        ellipseMod=false;
+        rectangleMod=false;
+        lineMod=false;
+        moveProp.moveSetFalse();
+        polygonMode=false;
+        resizeHBox.setDisable(false);
     }
     
     public void drawFunction(){
@@ -242,10 +285,6 @@ public class MainSceneController implements Initializable {
         }
     }
     
-  
-
-    
-
     @FXML
     private void mouseDown(MouseEvent event) {
         
@@ -468,9 +507,6 @@ public class MainSceneController implements Initializable {
         selMenu.getItems().get(2).disableProperty().set(true);
     }
 
-    @FXML
-    private void customShapeAction(ActionEvent event) {
-    }
 
     @FXML
     private void endDrag(DragEvent event) {
@@ -478,15 +514,13 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void zoomInOnAction(ActionEvent event) {
-        
-
-    
         if(this.resizeWindow<1.4){
             this.resizeWindow+=0.1;
         }
         this.Pane.setScaleX(this.resizeWindow);
         this.Pane.setScaleY(this.resizeWindow);   
     }
+    
     @FXML
     private void zoomOutOnAction(ActionEvent event) {
         if(this.resizeWindow>0.6){
@@ -519,14 +553,59 @@ public class MainSceneController implements Initializable {
     private void gridVisible(ActionEvent event) {
         if(gridBtn.isSelected()){
             Grid.setGridLinesVisible(true);
+            gridSlider.setDisable(false);
         }else{
             Grid.setGridLinesVisible(false);
+            gridSlider.setDisable(true);
         }
     }
 
     @FXML
     private void gridSliderDrag(MouseEvent event) {
-        Grid.setPrefSize((Pane.getWidth()*(gridSlider.getMax()-gridSlider.getMin()))/gridSlider.getValue(),(Pane.getHeight()*(gridSlider.getMax()-gridSlider.getMin()))/gridSlider.getValue());
+        Grid.setPrefSize((Pane.getWidth()*gridSlider.getValue()/(gridSlider.getMax()-gridSlider.getMin())),(Pane.getHeight()*gridSlider.getValue()/(gridSlider.getMax()-gridSlider.getMin())));
     }
+
+    @FXML
+    private void lessWidthAction(ActionEvent event) {
+        if(resize){
+            if(aspectRatio){
+                shSel.setScaleY(shSel.getScaleY()-0.1);
+            }
+            shSel.setScaleX(shSel.getScaleX()-0.1); 
+        }
+    }
+
+    @FXML
+    private void moreWidthAction(ActionEvent event) {
+        if(resize){
+            if(aspectRatio){
+                shSel.setScaleY(shSel.getScaleY()+0.1);
+            }
+            shSel.setScaleX(shSel.getScaleX()+0.1); 
+        }
+    }
+
+    @FXML
+    private void blockAspectRatioAction(ActionEvent event) {
+        if(blockAspectRatio.isSelected()){
+            HeightHBox.setDisable(true);
+            aspectRatio=true;
+        }else{
+            HeightHBox.setDisable(false);
+            aspectRatio=false;
+        }
+    }
+
+    @FXML
+    private void lessHeightAction(ActionEvent event) {
+        shSel.setScaleY(shSel.getScaleY()-0.1);
+    }
+
+    @FXML
+    private void moreHeightAction(ActionEvent event) {
+        shSel.setScaleY(shSel.getScaleY()+0.1);
+    }
+
+    
 
 }
