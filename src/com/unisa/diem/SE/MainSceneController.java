@@ -24,11 +24,14 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.Group;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -74,57 +77,51 @@ public class MainSceneController implements Initializable {
     private Button PolyMode;
     @FXML
     private ScrollPane scrollPane;
-    @FXML
-    private Text zoomOutInButton;
-    @FXML
-    private Text zoomInInButton;
     
     private double resizeWindow=1;
     @FXML
     private Button UndoBtn;
     @FXML
     private GridPane Grid;
-
-
-    //private Stack primary = new Stack<ArrayList<Shapes>>();
-    //private Stack secondary = new Stack<ArrayList<Shapes>>();
+    @FXML
+    private CheckBox gridBtn;
+    @FXML
+    private Slider gridSlider;
     
+
     private ContextMenu selMenu;
-    
-    
+       
     private Point2D selPosition;
     private Point2D start;
     private Point2D end;
-    
-    //private ArrayList<Shapes> ShapeList = new ArrayList<Shapes>();
-
+   
     Shapes shape = new Shapes();
     Move move=new Move();
     ChangeColorFill changeColorFill;
     ChangeColorStroke changeColorStroke;
     //DropShadow dropShadow = new DropShadow();
 
+    //Mode's Flag
     private boolean cutMode=false;
     private boolean rectangleMod=false;
     private boolean ellipseMod=false;
     private boolean lineMod=false;
     private boolean polygonMode;
+    
     //PATTERN COMMAND
     CommandExecutor commExe= new CommandExecutor();
     
-    //Polygon Points
-    ArrayList<Circle> points= new ArrayList<Circle>();
     // DEFINIZIONE PATTERN SINGLETON
     MoveSingleton moveProp=MoveSingleton.getInstance();
-    SelectionSingleton selSing=SelectionSingleton.getInstance();            //Inizialize pattern singleton
-    CopySingleton copySing=CopySingleton.getInstance();                     //Inizialize pattern singleton
-    //ColorSingle colorTemp;
+    SelectionSingleton selSing=SelectionSingleton.getInstance();
+    CopySingleton copySing=CopySingleton.getInstance();  
+    
+    //Polygon Points
+    ArrayList<Circle> points= new ArrayList<Circle>();
     
     Shape shSel;
     Shapes sh; 
     
-    
-   
     /**
      * Initializes the controller class.
      * @param url
@@ -143,7 +140,6 @@ public class MainSceneController implements Initializable {
             Pane.setPrefSize(newValue.getWidth(), newValue.getHeight());
         });
     }    
-
 
     @FXML
     private void rectangleMode(ActionEvent event) {
@@ -205,47 +201,23 @@ public class MainSceneController implements Initializable {
         polygonMode=false;
         commExe.undoLast();
     }
-    /*
-    public void drawFunction(){
-        if(ellipseMod){
-            sh=new dEllipse(start,end,StrokeColor.getValue(),FillColor.getValue());
-            sh.setType("Ellipse");
-            sh.draw(Pane);
-            //ShapeList.add(sh);
-
-        }if(rectangleMod){
-            sh=new Rect(start,end,StrokeColor.getValue(),FillColor.getValue());
-            sh.setType("Rectangle");
-            sh.draw(Pane);
-            //ShapeList.add(sh);
-            
-        }if(lineMod){
-            sh=new LineSegment(start,end,StrokeColor.getValue());
-            sh.setType("Line");
-            sh.draw(Pane);
-            //ShapeList.add(sh);
-        } 
-    }
-    */
     
     public void drawFunction(){
         if(ellipseMod){
             sh=new dEllipse(start,end,StrokeColor.getValue(),FillColor.getValue());
             sh.setType("Ellipse");
             sh.draw(Pane);
-            //ShapeList.add(sh);
 
         }if(rectangleMod){
             sh=new Rect(start,end,StrokeColor.getValue(),FillColor.getValue());
             sh.setType("Rectangle");
             sh.draw(Pane);
-            //ShapeList.add(sh);
             
         }if(lineMod){
             sh=new LineSegment(start,end,StrokeColor.getValue());
             sh.setType("Line");
             sh.draw(Pane);
-            //ShapeList.add(sh);
+
         } if(polygonMode){
             sh=new Polygons(Point2D.ZERO, Point2D.ZERO, StrokeColor.getValue(),FillColor.getValue(),points);
             sh.setType("Polygon");
@@ -264,15 +236,10 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private void mouseDrag(MouseEvent event) {
-        /*if(this.sh != null){
-            sh.resize(Pane, event.getX(), event.getY());
-            sh.stretch(Pane, event.getX(), event.getY());
-        }*/
         if((ellipseMod || rectangleMod || lineMod )&& event.getButton()==MouseButton.PRIMARY){
             end = new Point2D(event.getX(), event.getY());
             sh.resize(start, end);
         }
-        
     }
     
   
@@ -308,17 +275,14 @@ public class MainSceneController implements Initializable {
         } else if(event.getButton()==MouseButton.SECONDARY){
             Pane.getChildren().removeAll(points);
             points.clear();
-            //Shape shSel;
             
             if(!(event.getTarget().equals(Pane))){
                 
                 shSel = (Shape)event.getTarget();
-                //colorTemp=ColorSingle.getInstance((Color) shSel.getStroke()); 
                 
                 if(selSing.getList().contains(shSel) & shSel!=null ){       //se la shape è già selezionata, la vado a delezionare
 
                     shSel.getStrokeDashArray().clear(); //rimuovo tratteggio
-                    //shSel.setStroke(colorTemp.getColor());
                     selMenu.hide();
                     selSing.remove(shSel);
                     shSel=null;
@@ -333,13 +297,6 @@ public class MainSceneController implements Initializable {
                         selMenu.getItems().get(3).disableProperty().set(false);
                     }
 
-                    /*dropShadow.setRadius(5.0);
-                    dropShadow.setOffsetX(3.0);
-                    dropShadow.setOffsetY(3.0);
-                    dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
-                    shSel.setEffect(dropShadow);*/
-
-                    //shSel.setStroke(Color.RED);
                     shSel.getStrokeDashArray().addAll(5.0,5.0,5.0);
                     selPosition= new Point2D(event.getX(),event.getY());
                     selMenu.show(shSel,Side.RIGHT,0 ,0);
@@ -348,9 +305,7 @@ public class MainSceneController implements Initializable {
             }else{
                 
                 System.out.println("PANE moveMODE");
-                //ColorSingle colorTemp=ColorSingle.getInstance();
                 for(Shape s: selSing.getList()){
-                    //s.setStroke(colorTemp.getColor());
                     s.getStrokeDashArray().clear();
                 }
                 
@@ -482,9 +437,6 @@ public class MainSceneController implements Initializable {
             }
         });
         
-        
-        
-        
         selMenu.getItems().addAll(cut,copy,delete,paste,changeFillColor,changeStrokeColor,group,selectOther);
             
         }
@@ -557,6 +509,24 @@ public class MainSceneController implements Initializable {
         if (shSel != null) {
             commExe.execute(new GoBackgroundCommand(Pane, shSel));
         }
+    }
+
+    @FXML
+    private void scrollPaneMove(KeyEvent event) {
+    }
+
+    @FXML
+    private void gridVisible(ActionEvent event) {
+        if(gridBtn.isSelected()){
+            Grid.setGridLinesVisible(true);
+        }else{
+            Grid.setGridLinesVisible(false);
+        }
+    }
+
+    @FXML
+    private void gridSliderDrag(MouseEvent event) {
+        Grid.setPrefSize((Pane.getWidth()*(gridSlider.getMax()-gridSlider.getMin()))/gridSlider.getValue(),(Pane.getHeight()*(gridSlider.getMax()-gridSlider.getMin()))/gridSlider.getValue());
     }
 
 }

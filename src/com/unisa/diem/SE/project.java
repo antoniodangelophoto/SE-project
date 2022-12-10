@@ -24,6 +24,10 @@ public class project extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setHeight(800);
+        stage.setWidth(1000);
+        stage.setMaxHeight(1080);
+        stage.setMaxWidth(1920);
         stage.show();
     }
 
