@@ -9,7 +9,6 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
@@ -230,8 +229,13 @@
                      </graphic></Button>
                   <HBox prefHeight="23.0" prefWidth="140.0" />
                   <CheckBox fx:id="gridBtn" mnemonicParsing="false" onAction="#gridVisible" text="Grid" textAlignment="CENTER" />
-                  <HBox prefHeight="11.0" prefWidth="140.0" />
-                  <Slider fx:id="gridSlider" onDragDetected="#gridSliderDrag" prefHeight="16.0" prefWidth="98.0" showTickLabels="true" showTickMarks="true" value="50.0" />
+                  <HBox fx:id="sizeGridHBox" prefHeight="11.0" prefWidth="140.0">
+                     <children>
+                        <HBox prefHeight="26.0" prefWidth="22.0" />
+                        <Button fx:id="lessSizeGridButton" mnemonicParsing="false" onAction="#lessSizeGridAction" text="-" />
+                        <Label prefHeight="26.0" prefWidth="51.0" text="Size Grid" />
+                        <Button fx:id="moreSizeGridButton" mnemonicParsing="false" onAction="#moreSizeGridAction" text="+" />
+                     </children></HBox>
                   <HBox prefHeight="26.0" prefWidth="140.0" />
                   <Button fx:id="resizeBtn" mnemonicParsing="false" onAction="#resizeButton" prefHeight="26.0" prefWidth="140.0" text="Resize" />
                   <HBox prefHeight="14.0" prefWidth="140.0" />
@@ -288,235 +292,48 @@
                <content>
                   <Pane id="drawingPane" fx:id="Pane" onDragExited="#endDrag" onMouseClicked="#selectMove" onMouseDragged="#mouseDrag" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" prefHeight="1318.0" prefWidth="1996.0">
                      <children>
-                        <GridPane fx:id="Grid" disable="true" layoutX="-4.0" layoutY="6.0" mouseTransparent="true" opacity="0.3" prefHeight="1314.0" prefWidth="2027.0">
-                          <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.66661071777344" minWidth="10.0" prefWidth="325.66661071777344" />
-                          </columnConstraints>
-                          <rowConstraints>
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="278.3333435058594" minHeight="10.0" prefHeight="278.3333435058594" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <effect>
-                              <Blend opacity="0.41" />
-                           </effect>
-                        </GridPane>
+                        <GridPane fx:id="Grid" prefHeight="1317.0" prefWidth="1998.0">
+                            <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                          </GridPane>
                      </children>
                      <effect>
                         <Blend opacity="0.42" />

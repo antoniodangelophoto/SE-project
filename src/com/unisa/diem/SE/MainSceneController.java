@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
@@ -32,9 +33,11 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -83,8 +86,6 @@ public class MainSceneController implements Initializable {
     @FXML
     private CheckBox gridBtn;
     @FXML
-    private Slider gridSlider;
-    @FXML
     private Button resizeBtn;
     @FXML
     private HBox resizeHBox;
@@ -100,6 +101,12 @@ public class MainSceneController implements Initializable {
     private Button lessHeightButton;
     @FXML
     private Button moreHeightButton;
+    @FXML
+    private HBox sizeGridHBox;
+    @FXML
+    private Button lessSizeGridButton;
+    @FXML
+    private Button moreSizeGridButton;
 
     private ContextMenu selMenu;
        
@@ -111,6 +118,7 @@ public class MainSceneController implements Initializable {
     Move move=new Move();
     ChangeColorFill changeColorFill;
     ChangeColorStroke changeColorStroke;
+    
 
     //Mode's Flag
     private boolean cutMode=false;
@@ -135,6 +143,7 @@ public class MainSceneController implements Initializable {
     
     Shape shSel;
     Shapes sh; 
+    
  
     
     /**
@@ -157,7 +166,7 @@ public class MainSceneController implements Initializable {
         
         resizeHBox.setDisable(true);
         HeightHBox.setDisable(true);
-        gridSlider.setDisable(true);
+        //lessSizeGridAction(null);
         
     }    
 
@@ -553,16 +562,12 @@ public class MainSceneController implements Initializable {
     private void gridVisible(ActionEvent event) {
         if(gridBtn.isSelected()){
             Grid.setGridLinesVisible(true);
-            gridSlider.setDisable(false);
         }else{
             Grid.setGridLinesVisible(false);
-            gridSlider.setDisable(true);
         }
     }
 
-    @FXML
     private void gridSliderDrag(MouseEvent event) {
-        Grid.setPrefSize((Pane.getWidth()*gridSlider.getValue()/(gridSlider.getMax()-gridSlider.getMin())),(Pane.getHeight()*gridSlider.getValue()/(gridSlider.getMax()-gridSlider.getMin())));
     }
 
     @FXML
@@ -606,6 +611,100 @@ public class MainSceneController implements Initializable {
         shSel.setScaleY(shSel.getScaleY()+0.1);
     }
 
-    
+    @FXML
+    private void moreSizeGridAction(ActionEvent event) {
+        double width = Grid.getWidth();
+        double height = Grid.getHeight();
 
+        int columns = getColCount(Grid)+1;
+        int rows = getRowCount(Grid)+1;
+        
+        double newWidth = width / columns;
+        double newHeight = height / rows;
+        
+        Grid.getColumnConstraints().clear();
+        Grid.getRowConstraints().clear();
+
+        for (int i = 0; i < columns; i++) {
+            ColumnConstraints cc = new ColumnConstraints();
+            //cc.setHgrow(Priority.ALWAYS);
+            cc.setPrefWidth(newWidth);
+            Grid.getColumnConstraints().add(cc);
+        }
+        for (int i = 0; i < rows; i++) {
+            RowConstraints rc = new RowConstraints();
+            //rc.setVgrow(Priority.ALWAYS);
+            rc.setPrefHeight(newHeight);
+            Grid.getRowConstraints().add(rc);
+        }
+        
+    }
+
+    @FXML
+    private void lessSizeGridAction(ActionEvent event) {
+        double width = Grid.getWidth();
+        double height = Grid.getHeight();
+        
+        int columns = getColCount(Grid)-1;
+        int rows = getRowCount(Grid)-1;
+        
+        double newWidth = width / columns;
+        double newHeight = height / rows;
+        
+        Grid.getColumnConstraints().clear();
+        Grid.getRowConstraints().clear();
+
+        for (int i = 0; i < columns; i++) {
+            ColumnConstraints cc = new ColumnConstraints();
+            cc.setPrefWidth(newWidth);
+            //cc.setHgrow(Priority.ALWAYS);
+            Grid.getColumnConstraints().add(cc);
+        }
+        for (int i = 0; i < rows; i++) {
+            RowConstraints rc = new RowConstraints();
+            //rc.setVgrow(Priority.ALWAYS);
+            rc.setPrefHeight(newHeight);
+            Grid.getRowConstraints().add(rc);
+        }
+    }
+
+    
+    
+    /**
+     * This method count Row on the gridPane
+     * @param pane
+     * @return 
+     */
+    private int getRowCount(GridPane pane) {
+        int numRows = pane.getRowConstraints().size();
+        for (int i = 0; i < pane.getChildren().size(); i++) {
+            Node child = pane.getChildren().get(i);
+            if (child.isManaged()) {
+                Integer rowIndex = GridPane.getRowIndex(child);
+                if(rowIndex != null){
+                    numRows = Math.max(numRows,rowIndex+1);
+                }
+            }
+        }
+        System.out.println("numRows "+numRows);
+        return numRows;
+    }
+    
+    private int getColCount(GridPane pane) {
+        int numCol = pane.getColumnConstraints().size();
+        for (int i = 0; i < pane.getChildren().size(); i++) {
+            Node child = pane.getChildren().get(i);
+            if (child.isManaged()) {
+                Integer colIndex = GridPane.getColumnIndex(child);
+                if(colIndex != null){
+                    numCol = Math.max(numCol,colIndex+1);
+                }
+            }
+        }
+        System.out.println("numCol "+numCol);
+        return numCol;
+    }
+    
+    
+    
 }

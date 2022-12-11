@@ -16,6 +16,8 @@ import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import javafx.scene.control.Alert;
+import javafx.scene.shape.Polygon;
 
 /**
  *
@@ -36,6 +38,21 @@ public class FileManager {
         encoder.setExceptionListener(e -> {
             throw new RuntimeException(e);
         });
+        
+        boolean containsPolygon = false;
+        for (Node node : pane.getChildren()) {
+            if (node instanceof Polygon) {
+                containsPolygon = true;
+                break;
+            }
+        }
+        //if it contains a polygon, launch an alert
+        if (containsPolygon) {
+            Alert a = new Alert(Alert.AlertType.WARNING);
+            a.setContentText("The file contains a polygon, it will not be saved");
+            a.show();
+            return;
+        }
         
         encoder.setPersistenceDelegate(Color.class, new DefaultPersistenceDelegate(new String[]{"red", "green", "blue", "opacity"}));
         encoder.writeObject(pane.getChildren().toArray(new Node[0]));
