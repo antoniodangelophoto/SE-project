@@ -46,6 +46,17 @@ public class Paste implements Command{
                 pasteList.add(temp);
                 pane.getChildren().add(temp);
                 //System.out.println(pane.getChildren().toString());
+                
+                if(pane.getScaleX()>1){
+                    double scaleProp= pane.getScaleX()-1;
+                    temp.setScaleX(1-(scaleProp*(1-scaleProp)));
+                    temp.setScaleY(1-(scaleProp*(1-scaleProp)));
+                }
+                if(pane.getScaleX()<1){
+                    double scaleProp= 1-pane.getScaleX();
+                    temp.setScaleX(1+(scaleProp/(1-scaleProp)));
+                    temp.setScaleY(1+(scaleProp/(1-scaleProp)));
+                }
             }
             //copySing.clear();
     }

@@ -445,7 +445,7 @@ public class MainSceneController implements Initializable {
         group.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
-                  Command group= new pattGroup(Pane);
+                  Command group= new pattGroup(Pane,selPosition);
                   commExe.execute(group);
             }        
         });

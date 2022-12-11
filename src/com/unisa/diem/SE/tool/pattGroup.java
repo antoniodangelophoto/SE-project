@@ -21,8 +21,10 @@ public class pattGroup implements Command{
     SelectionSingleton selSing=SelectionSingleton.getInstance();
     ArrayList<Shape> gList= new ArrayList<Shape>();
     Shape temp=null;
-    public pattGroup(Pane pane) {
+    Point2D selP;
+    public pattGroup(Pane pane,Point2D sp) {
         this.pane = pane;
+        this.selP=sp;
     }
     
     @Override
@@ -53,7 +55,17 @@ public class pattGroup implements Command{
                     pane.getChildren().remove(s);
                 }
                 selSing.clear();
-                
+                temp.relocate(selP.getX()-tempPos.getX()/2, selP.getY()-tempPos.getY()/2);
+                if(pane.getScaleX()>1){
+                    double scaleProp= pane.getScaleX()-1;
+                    temp.setScaleX(1-(scaleProp*(1-scaleProp)));
+                    temp.setScaleY(1-(scaleProp*(1-scaleProp)));
+                }
+                if(pane.getScaleX()<1){
+                    double scaleProp= 1-pane.getScaleX();
+                    temp.setScaleX(1+(scaleProp/(1-scaleProp)));
+                    temp.setScaleY(1+(scaleProp/(1-scaleProp)));
+                }
                
                 pane.getChildren().add(temp);
                 
