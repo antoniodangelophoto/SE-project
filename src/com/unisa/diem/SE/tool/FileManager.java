@@ -46,6 +46,7 @@ public class FileManager {
                 break;
             }
         }
+        
         //if it contains a polygon, launch an alert
         if (containsPolygon) {
             Alert a = new Alert(Alert.AlertType.WARNING);
