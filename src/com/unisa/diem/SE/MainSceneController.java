@@ -28,7 +28,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Slider;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
@@ -128,7 +127,7 @@ public class MainSceneController implements Initializable {
     private boolean polygonMode;
     private boolean resize=false;
     
-    private boolean aspectRatio=false;
+    private boolean aspectRatio=true;
     
     //PATTERN COMMAND
     CommandExecutor commExe= new CommandExecutor();
@@ -166,7 +165,7 @@ public class MainSceneController implements Initializable {
         
         resizeHBox.setDisable(true);
         HeightHBox.setDisable(true);
-        //lessSizeGridAction(null);
+        sizeGridHBox.setDisable(true);
         
     }    
 
@@ -562,8 +561,10 @@ public class MainSceneController implements Initializable {
     private void gridVisible(ActionEvent event) {
         if(gridBtn.isSelected()){
             Grid.setGridLinesVisible(true);
+            sizeGridHBox.setDisable(false);
         }else{
             Grid.setGridLinesVisible(false);
+            sizeGridHBox.setDisable(true);
         }
     }
 
@@ -627,13 +628,11 @@ public class MainSceneController implements Initializable {
 
         for (int i = 0; i < columns; i++) {
             ColumnConstraints cc = new ColumnConstraints();
-            //cc.setHgrow(Priority.ALWAYS);
             cc.setPrefWidth(newWidth);
             Grid.getColumnConstraints().add(cc);
         }
         for (int i = 0; i < rows; i++) {
             RowConstraints rc = new RowConstraints();
-            //rc.setVgrow(Priority.ALWAYS);
             rc.setPrefHeight(newHeight);
             Grid.getRowConstraints().add(rc);
         }
@@ -657,12 +656,10 @@ public class MainSceneController implements Initializable {
         for (int i = 0; i < columns; i++) {
             ColumnConstraints cc = new ColumnConstraints();
             cc.setPrefWidth(newWidth);
-            //cc.setHgrow(Priority.ALWAYS);
             Grid.getColumnConstraints().add(cc);
         }
         for (int i = 0; i < rows; i++) {
             RowConstraints rc = new RowConstraints();
-            //rc.setVgrow(Priority.ALWAYS);
             rc.setPrefHeight(newHeight);
             Grid.getRowConstraints().add(rc);
         }

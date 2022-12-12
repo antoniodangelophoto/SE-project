@@ -36,19 +36,6 @@ public class LineSegment extends Shapes{
         
     }
     
-    /*@Override
-    public void setFillColor(Color color){
-        setColor(color);
-    }
-    
-    @Override
-    public void setTopLeft(Point2D x){
-        Point2D temp = x.subtract(this.getPosition());
-        this.setPosition(x);
-        this.setEndPosition(this.getEndPosition().add(temp));
-        super.setTopLeft(x);
-    }
-    */
     @Override
     public void draw(Pane pane) {
         line = new Line();

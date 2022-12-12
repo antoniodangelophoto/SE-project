@@ -8,7 +8,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 
 /**
  *
@@ -119,30 +118,6 @@ public class dEllipse extends Shapes {
         ellipse.setRadiusY(this.getyRadius());
     }
     
-    /*
-    public Shape draw(Pane pane, Point2D startPos, Point2D endPos, Color strokeColor, Color fillColor){
-        ellipse=new Ellipse();
-        setxRadius(Math.abs(startPos.getX() - endPos.getX()));
-        setyRadius(Math.abs(startPos.getY() - endPos.getY()));
-        
-        setxCenter(startPos.getX());
-        setyCenter(startPos.getY());
-        
-        
-        setStrokeColor(strokeColor);
-        setFillColor(fillColor);
-        
-        ellipse.setCenterX(this.xCenter);
-        ellipse.setCenterY(this.yCenter);
-        ellipse.setRadiusX(this.xRadius);
-        ellipse.setRadiusY(this.yRadius);
-        
-        ellipse.setStroke(getStrokeColor());
-        ellipse.setFill(getFillColor());
-        
-        //pane.getChildren().add(ellipse);
-        return ellipse;
-    }*/
     @Override
     public String toString() {
         return "Ellipse,"+this.getPosition().getX()+","+this.getPosition().getY() + "," + this.getEndPosition().getX() + "," + this.getEndPosition().getY() + ","+ this.getColor() + ","+ this.getFillColor() +"\n";

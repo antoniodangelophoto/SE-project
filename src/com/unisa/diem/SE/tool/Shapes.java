@@ -4,12 +4,9 @@
  */
 package com.unisa.diem.SE.tool;
 
-import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.*;
-import javafx.scene.shape.Shape;
 
 /**
  *
@@ -97,10 +94,7 @@ public class Shapes {
     
     public void draw(Pane pane){
     }
-/*
-    public void stretch(Pane pane, double x, double y) {
-    }
-*/
+
     public void resize(Point2D start, Point2D end) {
     }
 

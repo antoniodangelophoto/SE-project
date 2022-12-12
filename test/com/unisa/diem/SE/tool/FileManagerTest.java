@@ -27,5 +27,8 @@ import static org.junit.Assert.*;
 
 
 public class FileManagerTest {
-    
+    @Test
+    public void saveFile(){
+        assertEquals("ok","ok");
+    }
 }

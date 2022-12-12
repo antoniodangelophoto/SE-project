@@ -34,18 +34,15 @@ public class Paste implements Command{
             for(Shape s: copySing.getList()){
                 s.getStrokeDashArray().clear();
                 Copy = s;
-                //Point2D tempPos= new Point2D(s.getLayoutX(),s.getLayoutY());
                 temp=Shape.union(s, Copy);
 
                 temp.setFill(s.getFill());
                 temp.setStroke(s.getStroke());
-                //temp.relocate(selPosition.getX(), selPosition.getY());
-                //System.out.println(temp.getFill());
+                
                 temp.relocate(selPosition.getX()+a, selPosition.getY()+a);
                 a=a+20; 
                 pasteList.add(temp);
                 pane.getChildren().add(temp);
-                //System.out.println(pane.getChildren().toString());
                 
                 if(pane.getScaleX()>1){
                     double scaleProp= pane.getScaleX()-1;
@@ -58,7 +55,7 @@ public class Paste implements Command{
                     temp.setScaleY(1+(scaleProp/(1-scaleProp)));
                 }
             }
-            //copySing.clear();
+            
     }
 
     @Override

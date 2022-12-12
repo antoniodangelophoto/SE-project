@@ -292,7 +292,7 @@
                <content>
                   <Pane id="drawingPane" fx:id="Pane" onDragExited="#endDrag" onMouseClicked="#selectMove" onMouseDragged="#mouseDrag" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" prefHeight="1318.0" prefWidth="1996.0">
                      <children>
-                        <GridPane fx:id="Grid" prefHeight="1317.0" prefWidth="1998.0">
+                        <GridPane fx:id="Grid" opacity="0.05" prefHeight="1317.0" prefWidth="1998.0">
                             <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
